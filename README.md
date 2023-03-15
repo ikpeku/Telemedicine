@@ -1,15 +1,15 @@
-# Expo Router Example
+### 🚀 How to use
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
-
-## 🚀 How to use
+Clone [`Tele-Medicine`](https://github.com/ikpeku/Telemedicine.git) navigate to the root directory.
 
 ```sh
-npx create-react-native-app -t with-router
+npx expo start
 ```
 
-## 📝 Notes
+ to start the project
 
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
-- [Request for Comments](https://github.com/expo/router/discussions/1)
+#### to clear build errors use
+```sh
+npx expo start -c
+```
+
