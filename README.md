@@ -1,6 +1,10 @@
 ### 🚀 How to use
 
-Clone [`Tele-Medicine`](https://github.com/ikpeku/Telemedicine.git) navigate to the root directory.
+Clone [`Tele-Medicine`](https://github.com/ikpeku/Telemedicine.git) 
+```sh
+https://github.com/ikpeku/Telemedicine.git
+``` 
+navigate to the root directory.
 
 ```sh
 npx expo start
