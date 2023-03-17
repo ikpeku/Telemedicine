@@ -1,14 +1,15 @@
 import { useState } from "react"
-import { Text, View, Pressable, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Keyboard } from "react-native";
-import { usePathname } from "expo-router";
+import { Text, View, Pressable, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Keyboard, Image } from "react-native";
+import { usePathname, useRouter } from "expo-router";
 import { Feather } from '@expo/vector-icons';
 import Button from "../../components/Button";
 
 export default function Sign() {
     const [isvisible, setIsvisible] = useState(false)
+    const router = useRouter();
 
     const pathname = usePathname();
-    console.log(pathname)
+
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -16,7 +17,6 @@ export default function Sign() {
                 <Pressable onPress={Keyboard.dismiss}>
                     <View>
                         <Text style={styles.title}>{pathname === "/signup/login" ? "Welcome back" : "Set up your profile"}</Text>
-
 
                         {!pathname === "/signup/login" && <View style={styles.textInputContainer}>
                             <TextInput placeholder="Full Name" style={styles.input} />
@@ -54,10 +54,12 @@ export default function Sign() {
                         <View style={styles.line} />
                     </View>
 
-                    <Button styleProps={{ width: "90%", alignSelf: "center", marginVertical: 10, flexDirection: "row" }}>
-                        <Image source={require('../../assets/google.png')} resizeMode="contain" />
-                        <Text style={[styles.cta, { color: "#fff" }]}>{pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}</Text>
-                    </Button>
+                    <Pressable onPress={() => router.push("/homescreens/")}>
+                        <Button bg="#fff" styleProps={{ width: "90%", alignSelf: "center", justifyContent: "center", gap: 10, marginVertical: 10, flexDirection: "row" }}>
+                            <Image source={require('../../assets/google.png')} style={{ width: 25, height: 25 }} />
+                            <Text style={[styles.cta, { color: "#0665CB" }]}>{pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}</Text>
+                        </Button>
+                    </Pressable>
 
                 </Pressable>
             </ScrollView>
@@ -69,6 +71,7 @@ export default function Sign() {
 
 
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
