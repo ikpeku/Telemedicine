@@ -37,31 +37,36 @@ export default function Profile() {
             </View>
 
 
+            <Link href={{ pathname: "homescreens/Profile/password" }} asChild>
+                <Pressable>
+                    <View style={styles.switchContainer}>
+                        <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
 
-            <View style={styles.switchContainer}>
-                <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
+                            <MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />
+                            <Text style={[styles.title, { fontSize: 16 }]}>Password</Text>
+                        </View>
 
-                    <MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />
-                    <Text style={[styles.title, { fontSize: 16 }]}>Password</Text>
-                </View>
 
-                <Link href={{ pathname: "homescreens/Profile/password" }} >
-                    <Ionicons name="chevron-forward" size={20} color="#0665CB" />
-                </Link>
+                        <Ionicons name="chevron-forward" size={20} color="#0665CB" />
 
-            </View>
+                    </View>
+                </Pressable>
+            </Link>
 
-            <View style={styles.switchContainer}>
-                <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
 
-                    <SimpleLineIcons name="earphones-alt" size={20} color="#0665CB" />
-                    <Text style={[styles.title, { fontSize: 16 }]}>Help & Support</Text>
-                </View>
-                <Link href={{ pathname: "homescreens/Profile/help" }} >
-                    <Ionicons name="chevron-forward" size={20} color="#0665CB" />
-                </Link>
+            <Link href={{ pathname: "homescreens/Profile/help" }} asChild>
+                <Pressable>
+                    <View style={styles.switchContainer}>
+                        <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
 
-            </View>
+                            <SimpleLineIcons name="earphones-alt" size={20} color="#0665CB" />
+                            <Text style={[styles.title, { fontSize: 16 }]}>Help & Support</Text>
+                        </View>
+
+                        <Ionicons name="chevron-forward" size={20} color="#0665CB" />
+                    </View>
+                </Pressable>
+            </Link>
 
             <View style={styles.switchContainer}>
                 <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>

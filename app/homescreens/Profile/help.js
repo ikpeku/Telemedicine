@@ -1,13 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
 import * as MailComposer from 'expo-mail-composer';
 import { FontAwesome5, Feather } from '@expo/vector-icons';
+import * as Linking from 'expo-linking';
 
 const help = () => {
 
-    const { MailComposerStatus, composeAsync, isAvailableAsync } = MailComposer
+    const handleMailto = async () => {
+        await MailComposer.composeAsync({
+            recipients: ['lol@example.com'],
+        });
+    }
 
-    const handleMailto = () => {
-        console.log(MailComposerStatus)
+    const handleCall = async () => {
+        await Linking.openURL('tel: +2348124458760')
 
     }
 
@@ -22,10 +27,13 @@ const help = () => {
                     <Text>telemedicine@gmail.com</Text>
                 </View>
             </Pressable>
-            <View style={styles.textContainer}>
-                <Feather name="phone" size={24} color="#0665CB" />
-                <Text>+2348124458760</Text>
-            </View>
+
+            <Pressable onPress={handleCall}>
+                <View style={styles.textContainer}>
+                    <Feather name="phone" size={24} color="#0665CB" />
+                    <Text>+2348124458760</Text>
+                </View>
+            </Pressable>
         </View>
     )
 }

@@ -12,8 +12,8 @@ export default function Sign() {
 
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-            <ScrollView>
+        <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 30 }} showsVerticalScrollIndicator={false} >
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ paddingBottom: 20 }} >
                 <Pressable onPress={Keyboard.dismiss}>
                     <View>
                         <Text style={styles.title}>{pathname === "/signup/login" ? "Welcome back" : "Set up your profile"}</Text>
@@ -62,8 +62,8 @@ export default function Sign() {
                     </Pressable>
 
                 </Pressable>
-            </ScrollView>
-        </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
+        </ScrollView>
 
     )
 
