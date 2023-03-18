@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { Feather } from '@expo/vector-icons';
 import Button from '../../../components/Button';
+import { TextInput } from "react-native"
 
 export default function password() {
     const [isvisible, setIsvisible] = useState(false)
