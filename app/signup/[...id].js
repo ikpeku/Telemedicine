@@ -1,69 +1,118 @@
 import { useState } from "react"
 import { Text, View, Pressable, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Keyboard, Image } from "react-native";
-import { usePathname, useRouter } from "expo-router";
+import { usePathname, useRouter, Stack, Link } from "expo-router";
 import { Feather } from '@expo/vector-icons';
-import Button from "../../components/Button";
+import Button from "../../static/Button";
+import { useForm } from "react-hook-form";
+import Input from "../../static/Input";
 
 export default function Sign() {
-    const [isvisible, setIsvisible] = useState(false)
-    const router = useRouter();
-
     const pathname = usePathname();
 
+    const router = useRouter();
+    const { handleSubmit, control } = useForm({
+        defaultValues: {
+            Full_Name: "",
+            Email_Address: "",
+            Phone_Number: "",
+            Password: ""
+        }
+    });
+
+
+    const onFormSubmit = (data) => {
+        console.log(data)
+    }
+
+    // style={{ paddingBottom: 20 }}
+    // contentContainerStyle={{ paddingBottom: 30 }}
 
     return (
-        <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 30 }} showsVerticalScrollIndicator={false} >
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ paddingBottom: 20 }} >
-                <Pressable onPress={Keyboard.dismiss}>
-                    <View>
-                        <Text style={styles.title}>{pathname === "/signup/login" ? "Welcome back" : "Set up your profile"}</Text>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 30 }}>
+                <Stack.Screen
+                    options={{
+                        title: pathname === "/signup/login" ? "Welcome back" : "Set up your profile",
+                        headerTintColor: "#0665CB", headerLargeTitleStyle: styles.title,
+                        headerTitleStyle: styles.title, headerBackVisible: false,
+                        headerShadowVisible: false
+                    }} />
 
-                        {!pathname === "/signup/login" && <View style={styles.textInputContainer}>
-                            <TextInput placeholder="Full Name" style={styles.input} />
-                        </View>}
 
-                        <View style={styles.textInputContainer}>
+                {/* <Pressable onPress={Keyboard.dismiss}> */}
+
+
+                <View style={{ marginTop: 10 }}>
+
+                    {pathname === "/signup/register" &&
+                        <Input control={control} label="Full Name" placeholder="Enter Full Name" name="Full_Name" rules={{ required: "Required" }} />
+                    }
+
+
+
+                    <Input control={control} label="Email Address" placeholder="Enter Email" name=" Email_Address" rules={{ required: "Required" }} />
+
+                    {pathname === "/signup/register" &&
+                        <Input control={control} label="Phone Number" placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "Required" }} />
+                    }
+
+                    <Input control={control} label="Password" placeholder="Enter Password" name="Password" rules={{ required: "Required" }} passord={true} />
+
+                    {/* {pathname === "/signup/register" &&
+                            <View style={styles.textInputContainer}>
+                                <TextInput placeholder="Full Name" style={styles.input} />
+                            </View>} */}
+
+                    {/* <View style={styles.textInputContainer}>
                             <TextInput placeholder="Email Address" style={styles.input} />
-                        </View>
+                        </View> */}
 
-                        {!pathname === "/signup/login" && <View style={styles.textInputContainer}>
+
+                    {/* {pathname === "/signup/register" && <View style={styles.textInputContainer}>
                             <TextInput placeholder="Phone Number" style={styles.input} />
-                        </View>}
+                        </View>} */}
 
-                        <View style={[styles.textInputContainer, styles.password]}>
+                    {/* <View style={[styles.textInputContainer, styles.password]}>
                             <TextInput placeholder="Password" secureTextEntry={isvisible} style={styles.input} />
                             {!isvisible ? <Feather onPress={() => setIsvisible(true)} name="eye-off" size={18} color="rgba(0, 0, 0, 0.35)" style={{ marginLeft: "auto" }} /> :
                                 <Feather onPress={() => setIsvisible(false)} name="eye" size={18} color="rgba(0, 0, 0, 0.35)" style={{ marginLeft: "auto" }} />}
-                        </View>
-                    </View>
+                        </View> */}
+                </View>
 
 
-                    <Button styleProps={{ width: "70%", alignSelf: "center", marginVertical: 30 }}>
-                        <Text style={[styles.cta, { color: "#fff" }]}>{pathname === "/signup/login" ? "Log In" : "Sign up"}</Text>
-                    </Button>
+                {/*  Sinup btn*/}
+                <View style={{ width: "80%", alignSelf: "center", marginVertical: 30 }}>
+                    <Button onPress={handleSubmit(onFormSubmit)} title={pathname === "/signup/login" ? "Log In" : "Sign up"} />
+                </View>
 
 
-                    <View style={styles.ctaContainer}>
-                        <Text style={styles.cta}>Already have an account</Text>
-                        <Pressable><Text style={styles.ctaBtn}>{!pathname === "/signup/login" ? "Log In" : "Sign up"}</Text></Pressable>
-                    </View>
 
-                    <View style={styles.lineContainer}>
-                        <View style={styles.line} />
-                        <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>or</Text>
-                        <View style={styles.line} />
-                    </View>
 
-                    <Pressable onPress={() => router.push("/homescreens/")}>
-                        <Button bg="#fff" styleProps={{ width: "90%", alignSelf: "center", justifyContent: "center", gap: 10, marginVertical: 10, flexDirection: "row" }}>
-                            <Image source={require('../../assets/google.png')} style={{ width: 25, height: 25 }} />
-                            <Text style={[styles.cta, { color: "#0665CB" }]}>{pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}</Text>
-                        </Button>
-                    </Pressable>
+                <View style={styles.ctaContainer}>
+                    <Text style={styles.cta}>Already have an account</Text>
+                    <Link href={pathname === "/signup/login" ? "/signup/register" : "/signup/login"}>
+                        <Text style={styles.ctaBtn}>{pathname === "/signup/login" ? "Sign Up" : "Sign In"}</Text>
+                    </Link>
+                </View>
 
-                </Pressable>
-            </KeyboardAvoidingView>
-        </ScrollView>
+                <View style={styles.lineContainer}>
+                    <View style={styles.line} />
+                    <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>or</Text>
+                    <View style={styles.line} />
+                </View>
+
+                {/* Google btn */}
+                <Button
+                    title={pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}
+                    icon={true}
+                    type="secondary"
+                    onPress={() => router.push("/homescreens/")}
+                />
+
+
+                {/* </Pressable> */}
+            </ScrollView>
+        </KeyboardAvoidingView>
 
     )
 
@@ -75,8 +124,8 @@ export default function Sign() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        marginTop: 30
+        paddingHorizontal: 10,
+        backgroundColor: "#fff"
     },
     title: {
         fontFamily: 'Avenir',
@@ -114,6 +163,7 @@ const styles = StyleSheet.create({
     ctaContainer: {
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "center",
         gap: 5
     },
     ctaBtn: {

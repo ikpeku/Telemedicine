@@ -82,16 +82,20 @@ export default function Profile() {
                 />
             </View>
 
-            <View style={[styles.switchContainer, { marginTop: "auto" }]}>
-                <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
 
-                    {/* <SimpleLineIcons name="earphones-alt" size={20} color="#EA4335" /> */}
-                    <Ionicons name="ios-exit-outline" size={24} color="#EA4335" />
-                    <Text style={[styles.title, { fontSize: 16, color: "#EA4335" }]}>Sign out</Text>
-                </View>
+            <View style={[styles.switchContainer, { marginTop: "auto" }]}>
+
+                <Pressable onPress={() => router.push("/onboarding2")} >
+                    <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
+
+                        {/* <SimpleLineIcons name="earphones-alt" size={20} color="#EA4335" /> */}
+                        <Ionicons name="ios-exit-outline" size={24} color="#EA4335" />
+                        <Text style={[styles.title, { fontSize: 16, color: "#EA4335" }]}>Sign out</Text>
+                    </View>
+
+                </Pressable>
 
             </View>
-
 
         </View>
     )

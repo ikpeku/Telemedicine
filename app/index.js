@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from "react"
 import { SplashScreen } from "expo-router";
-import { Text, View, Pressable, Image, ScrollView } from "react-native";
+import { Text, View, Image } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import { styles } from "../styles/Style";
 import Splash from "../components/Splash";
 import { useFonts } from 'expo-font';
 import { useRouter } from "expo-router";
+import Button from "../static/Button";
+
 
 
 SplashScreen.preventAutoHideAsync();
@@ -44,41 +46,41 @@ export default function Page() {
 
 
   return (
-    <Splash onLayout={onLayoutRootView}>
-      <ScrollView style={styles.container} >
-        <StatusBar style="light" />
+    <View style={styles.container} onLayout={onLayoutRootView} >
+
+      <View style={styles.splashPhotoContainer}>
+
+        <StatusBar style="dark" />
         {!isReady && <SplashScreen />}
 
-        <View style={styles.skip}>
-          <Pressable onPress={() => router.replace("/onboarding3")}>
-            <Text style={styles.skipText}>Skip</Text>
-          </Pressable>
-        </View>
+        <Image source={require('../assets/splash1.png')} style={styles.splashPhoto} resizeMethod="scale" resizeMode="contain" />
+      </View>
 
-        <View style={styles.splashPhotoContainer}>
-          <Image source={require('../assets/splash1.png')} style={styles.splashPhoto} resizeMode="contain" />
-        </View>
+      <View style={styles.layout}>
 
         <View style={styles.splashPaginations}>
-          <View style={[styles.splashPagination, { width: 20, height: 3 }]} />
+          <View style={[styles.splashPagination, { width: 25, height: 3, backgroundColor: "#0665CB" }]} />
           <View style={styles.splashPagination} />
           <View style={styles.splashPagination} />
         </View>
 
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Identify your illness</Text>
-          <Text style={styles.text}>Choose the most appropriate diagnosis that you want to treat</Text>
+
+
+        <View style={styles.bottomContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Identify your illness</Text>
+            <Text style={styles.text}>Choose the most appropriate diagnosis that you want to treat</Text>
+          </View>
+
+
+          <Button title="Next" onPress={() => router.push("onboarding2")} />
         </View>
 
-        <View >
-          <Pressable onPress={() => router.push("onboarding2")} style={styles.splashBtnContainer}>
-            <Text style={styles.splashBtnTextContainer}>Next</Text>
-          </Pressable>
-        </View>
+      </View>
 
 
-      </ScrollView>
-    </Splash>
+    </View>
+    // </Splash>
   );
 }
 
