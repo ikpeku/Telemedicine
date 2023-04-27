@@ -1,6 +1,9 @@
 import { Text, StyleSheet } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { Provider as PaperProvider } from 'react-native-paper';
+
+
+
 const App = () => {
     const router = useRouter();
 
@@ -10,6 +13,7 @@ const App = () => {
                 <Stack.Screen name='index' options={{ headerRight: () => <Text style={styles.skip} onPress={() => router.push("onboarding3")}>Skip</Text> }} />
                 <Stack.Screen name='onboarding2' options={{ headerRight: () => <Text style={styles.skip} onPress={() => router.push("onboarding3")}>Skip</Text> }} />
                 <Stack.Screen name='onboarding3' />
+                <Stack.Screen name='homescreens' options={{ headerShown: false }} />
             </Stack>
         </PaperProvider>
     )

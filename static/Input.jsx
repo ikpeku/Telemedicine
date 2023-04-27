@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-paper';
 import { Controller } from "react-hook-form";
 
 const Input = ({ control, name, label, placeholder, rules, passord = false }) => {
-    const [secure, setSecure] = React.useState(false);
+    const [secure, setSecure] = React.useState(true);
 
 
 

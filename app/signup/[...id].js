@@ -50,13 +50,19 @@ export default function Sign() {
 
 
 
-                    <Input control={control} label="Email Address" placeholder="Enter Email" name=" Email_Address" rules={{ required: "Required" }} />
+                    <Input control={control} label="Email Address" placeholder="Enter Email" name=" Email_Address" rules={{
+                        required: "This field is required.", pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                            message: 'Enter a valid e-mail address',
+                        }
+                    }} />
 
                     {pathname === "/signup/register" &&
                         <Input control={control} label="Phone Number" placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "Required" }} />
                     }
 
-                    <Input control={control} label="Password" placeholder="Enter Password" name="Password" rules={{ required: "Required" }} passord={true} />
+                    <Input control={control} label="Password" placeholder="Enter Password" name="Password"
+                        rules={{ required: true, minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true} />
 
                     {/* {pathname === "/signup/register" &&
                             <View style={styles.textInputContainer}>

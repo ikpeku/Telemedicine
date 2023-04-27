@@ -4,10 +4,7 @@ import {
     FlatList,
     StyleSheet,
     Text,
-    StatusBar,
 } from 'react-native';
-
-// import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 const DATA = [
@@ -109,7 +106,7 @@ const Item = ({ title, date }) => {
     return (
         <View style={styles.item}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={{ color: "#000" }}>{date.toLocaleDateString()}</Text>
+            {/* <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>{date.toLocaleDateString()}</Text> */}
         </View>
     )
 };
@@ -126,14 +123,12 @@ const Empty = () => {
 export default function Notification() {
     return (
         <SafeAreaView style={styles.container}>
-            <View>
-                <Text style={[styles.title, styles.extraTitle]}>Notifications</Text>
-            </View>
             <FlatList
                 data={DATA}
-                renderItem={({ item }) => <Item title={item.title} date={item.date} />}
+                renderItem={({ item }) => <Item title={item.title} data={item.date} />}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={<Empty />}
+                showsVerticalScrollIndicator={false}
             />
         </SafeAreaView>
     )
@@ -143,29 +138,34 @@ export default function Notification() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
+        alignItems: "center",
+        width: "100%",
+        paddingHorizontal: 10,
+        backgroundColor: "#fff"
     },
     item: {
-        backgroundColor: 'rgba(6, 101, 203, 0.08',
-        padding: 20,
-        marginVertical: 8,
+        backgroundColor: '#fff',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 8,
+
+        elevation: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 18,
+        marginVertical: 5
+
+
     },
     title: {
         fontFamily: 'Avenir',
         fontWeight: 500,
         fontSize: 16,
         lineHeight: 22,
-        color: "#0665CB",
+        color: "#000",
     },
-    empty: {
-
-    },
-    extraTitle: {
-        fontWeight: 900,
-        fontSize: 20,
-        lineHeight: 27,
-        textAlign: "center"
-
-    }
 });
 

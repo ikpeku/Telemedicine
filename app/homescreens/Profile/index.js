@@ -1,100 +1,114 @@
-import { StyleSheet, Text, View, Switch, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React, { useState } from 'react'
-import Button from '../../../components/Button';
-import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons';
 import { useRouter, Link } from "expo-router";
+import { Avatar, Switch } from 'react-native-paper';
+import Button from '../../../static/Button';
 
 export default function Profile() {
     const router = useRouter();
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+    const Item = ({ path, leftIcon, rightIcon, title, signout = false }) => {
+        return (
+            <Link href={{ pathname: path }} asChild>
+                <Pressable>
+                    <View style={[styles.switchContainer, signout ? {} : { borderTopWidth: StyleSheet.hairlineWidth }]}>
+                        <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
+
+                            {leftIcon}
+                            <Text style={[styles.title, { fontSize: 16 }, signout ? { color: "#EA4335" } : {}]}>{title}</Text>
+                        </View>
+
+
+                        {rightIcon}
+
+                    </View>
+                </Pressable>
+            </Link>
+        )
+    }
 
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View >
-                    <Text style={styles.title}>Collins Jeff</Text>
-                    <Text style={styles.subTitle}>collinsjef655@gmail.com</Text>
+                <View style={styles.headerContainer}>
+                    <Avatar.Image size={40}
+                        source={{ uri: "https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960" }} />
+
+                    <View>
+                        <Text style={styles.title}>Collins Jeff</Text>
+                        <Text style={styles.subTitle}>collinsjef655@gmail.com</Text>
+                    </View>
+
+
                 </View>
 
-                <Ionicons name="person-circle" size={24} color="black" />
+                <Avatar.Image size={24} source={require('../../../assets/profileIcon.png')} style={{ backgroundColor: "#fff" }} />
             </View>
 
-            <View>
+
+
+            <View style={{ padding: 10 }}>
                 <Link href={{ pathname: "homescreens/Profile/editprofile" }} asChild>
-                    <Pressable >
-                        <Button bg='#EBF3FB' styleProps={{ width: "90%", alignSelf: "center", marginVertical: 30 }}>
-                            <Text style={[styles.cta, { color: "#0665CB", textAlign: "center", fontFamily: "Lato" }]}>Edit Profile</Text>
-                        </Button>
-                    </Pressable>
-                </Link>
+                    <Button title="Edit Profile" type='textiary' />
 
+                </Link>
             </View>
+
 
             <View>
-                <Text style={[styles.cta, { paddingHorizontal: 20, paddingBottom: 30 }]}>Settings</Text>
+                <Text style={[styles.cta, { paddingHorizontal: 10, paddingBottom: 30, marginTop: 20 }]}>Settings</Text>
             </View>
 
 
-            <Link href={{ pathname: "homescreens/Profile/password" }} asChild>
-                <Pressable>
-                    <View style={styles.switchContainer}>
-                        <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
-
-                            <MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />
-                            <Text style={[styles.title, { fontSize: 16 }]}>Password</Text>
-                        </View>
-
-
-                        <Ionicons name="chevron-forward" size={20} color="#0665CB" />
-
-                    </View>
-                </Pressable>
-            </Link>
+            {/* Password */}
+            <Item
+                title="Password"
+                leftIcon={<MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />}
+                rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                path="homescreens/Profile/password"
+            />
 
 
-            <Link href={{ pathname: "homescreens/Profile/help" }} asChild>
-                <Pressable>
-                    <View style={styles.switchContainer}>
-                        <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
+            {/* help */}
+            <Item
+                title="Help & Support"
+                leftIcon={<SimpleLineIcons name="earphones-alt" size={20} color="#0665CB" />}
+                rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                path="homescreens/Profile/help"
+            />
 
-                            <SimpleLineIcons name="earphones-alt" size={20} color="#0665CB" />
-                            <Text style={[styles.title, { fontSize: 16 }]}>Help & Support</Text>
-                        </View>
+            {/* Subscribe */}
 
-                        <Ionicons name="chevron-forward" size={20} color="#0665CB" />
-                    </View>
-                </Pressable>
-            </Link>
+            <Item
+                title="Subscribe"
+                leftIcon={<Feather name="arrow-up-circle" size={24} color="#0665CB" />}
+                rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                path="homescreens/Profile/subscribe"
+            />
 
-            <View style={styles.switchContainer}>
-                <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
-                    <Feather name="bell" size={20} color="#0665CB" />
-                    <Text style={[styles.title, { fontSize: 16 }]}>Notification</Text>
-                </View>
-                <Switch
-                    trackColor={{ false: '#0665CB', true: '#0665CB' }}
-                    thumbColor={isEnabled ? '#EBF3FB' : '#EBF3FB'}
-                    ios_backgroundColor="#0665CB"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
+            {/* Notification */}
+            <Item
+                title="Notification"
+                leftIcon={<Feather name="bell" size={20} color="#0665CB" />}
+                rightIcon={<Switch color='#0665CB' value={isSwitchOn} onValueChange={onToggleSwitch} />}
+            />
+
+
+
+            {/* Exit */}
+            <View style={[{ marginTop: "auto" }]}>
+                <Item
+                    title="Sign out"
+                    leftIcon={<Ionicons name="ios-exit-outline" size={24} color="#EA4335" />}
+                    signout={true}
                 />
-            </View>
-
-
-            <View style={[styles.switchContainer, { marginTop: "auto" }]}>
-
-                <Pressable onPress={() => router.push("/onboarding2")} >
-                    <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
-
-                        {/* <SimpleLineIcons name="earphones-alt" size={20} color="#EA4335" /> */}
-                        <Ionicons name="ios-exit-outline" size={24} color="#EA4335" />
-                        <Text style={[styles.title, { fontSize: 16, color: "#EA4335" }]}>Sign out</Text>
-                    </View>
-
-                </Pressable>
-
             </View>
 
         </View>
@@ -104,12 +118,18 @@ export default function Profile() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff"
     },
     header: {
         padding: 20,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center"
+    },
+    headerContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
     },
     title: {
         fontFamily: 'Avenir',
@@ -126,19 +146,19 @@ const styles = StyleSheet.create({
     },
     cta: {
         fontFamily: 'Avenir',
-        fontWeight: "400",
+        fontWeight: "500",
         fontSize: 16,
         lineHeight: 22,
 
-        color: "rgba(0, 0, 0, 0.5)"
+        color: "#000"
     },
     switchContainer: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 10,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+
+        borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: "rgba(0, 0, 0, 0.1)",
         paddingVertical: 13
     }

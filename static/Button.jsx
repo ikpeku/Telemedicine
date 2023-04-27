@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     splashBtnContainer: {
         width: "100%",
         borderRadius: 8,
-        borderColor: "#0665CB",
+
         borderWidth: StyleSheet.hairlineWidth,
         shadowColor: "#000",
         shadowOffset: {
@@ -43,16 +43,26 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     btn_secondary: {
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        borderColor: "#0665CB",
     },
     btnText_secondary: {
         color: "#0665CB"
     },
     btn_primary: {
         backgroundColor: "#0665CB",
+        borderColor: "#0665CB",
     },
     btnText_primary: {
         color: "#fff"
+    },
+    btn_textiary: {
+        backgroundColor: "#fff",
+        borderColor: "#1E1E1E",
+
+    },
+    btnText_textiary: {
+        color: "#0665CB"
     },
     IconContainer: {
         justifyContent: "center",

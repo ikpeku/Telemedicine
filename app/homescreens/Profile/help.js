@@ -43,6 +43,7 @@ export default help
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff"
     },
     title: {
         fontFamily: 'Avenir',
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 20,
         paddingHorizontal: 10,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: "rgba(0, 0, 0, 0.1)",
-        paddingVertical: 13
+        paddingVertical: 18
     }
 })
