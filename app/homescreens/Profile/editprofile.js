@@ -1,29 +1,15 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, KeyboardAvoidingView, Platform, Pressable, Keyboard } from 'react-native'
-import React from 'react'
-import Input from '../../../static/Input';
-import { useForm } from "react-hook-form";
-import Button from '../../../static/Button';
+import { useState } from 'react'
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
+import { MedicalProfile, PersonalProfile } from '../../../components';
 
 
 export default function editprofile() {
-    const [IsMedical, setIsMedical] = React.useState(false);
+    const [IsMedical, setIsMedical] = useState(false);
 
 
-    const { handleSubmit, control, watch } = useForm({
-        defaultValues: {
-            Full_Name: "",
-            Email: "",
-            Phone_Number: "",
-            Address: "",
-            Sex: "",
-            DOB: ""
-        }
-    });
 
 
-    const onSavePress = () => {
 
-    }
 
 
 
@@ -37,33 +23,12 @@ export default function editprofile() {
                 </View>
 
 
-                {/* <View style={styles.textInputContainer}>
-                        <TextInput placeholder="Full Name" style={styles.input} />
-                    </View>
 
-                    <View style={styles.textInputContainer}>
-                        <TextInput placeholder="Email Address" style={styles.input} />
-                    </View>
+                {!IsMedical && <PersonalProfile />}
+                {IsMedical && <MedicalProfile />}
 
-                    <View style={styles.textInputContainer}>
-                        <TextInput placeholder="Phone Number" style={styles.input} />
-                    </View>
 
-                    <View>
-                        <Button styleProps={{ width: "90%", alignSelf: "center", marginVertical: 30 }}>
-                            <Text style={[styles.cta, { color: "#fff" }]}>Save</Text>
-                        </Button>
-                    </View> */}
 
-                {!IsMedical && <View>
-                    <Input control={control} name="Full_Name" placeholder="Enter Full Name" label="Full Name" rules={{ required: "required" }} />
-                    <Input control={control} name="Email" placeholder="Enter Email" label="Email" rules={{ required: "required" }} />
-                    <Input control={control} name=" Phone_Number" placeholder="Enter  Phone Number" label=" Phone Number" rules={{ required: "required" }} />
-                    <Input control={control} name="Address" placeholder="Enter Address" label="Address" rules={{ required: "required" }} />
-
-                </View>}
-
-                <Button title="Save" onPress={handleSubmit(onSavePress)} />
 
             </KeyboardAvoidingView>
         </ScrollView>
@@ -78,7 +43,9 @@ const styles = StyleSheet.create({
 
     },
     segmentContainer: {
-        flexDirection: "row"
+        flexDirection: "row",
+        paddingTop: 10,
+        marginBottom: 15
     },
     segmentActive: {
         borderBottomColor: "#0665CB",
@@ -94,28 +61,5 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: "center"
     },
-    textInputContainer: {
-        paddingVertical: 8,
-        paddingHorizontal: 20,
-        borderRadius: 24,
-        borderWidth: 1,
-        borderColor: "rgba(0, 0, 0, 0.08)",
-        marginVertical: 20
-    },
-    input: {
-        height: 40,
-        flexGrow: 1,
-    },
-    cta: {
-        fontFamily: 'Avenir',
-        fontWeight: "400",
-        fontSize: 16,
-        lineHeight: 22,
-
-        textAlign: "center",
-
-        color: "rgba(0, 0, 0, 0.5)"
-    },
-
 
 })

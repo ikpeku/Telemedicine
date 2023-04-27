@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React, { useState } from 'react'
-import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons';
-import { useRouter, Link } from "expo-router";
+import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Link } from "expo-router";
 import { Avatar, Switch } from 'react-native-paper';
 import Button from '../../../static/Button';
 
 export default function Profile() {
-    const router = useRouter();
 
 
     const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -90,7 +89,7 @@ export default function Profile() {
                 title="Subscribe"
                 leftIcon={<Feather name="arrow-up-circle" size={24} color="#0665CB" />}
                 rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
-                path="homescreens/Profile/subscribe"
+                path="homescreens/Profile/Subscribe"
             />
 
             {/* Notification */}

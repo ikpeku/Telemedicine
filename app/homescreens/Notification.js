@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Text,
 } from 'react-native';
+import { Card, Text as Paper_Text } from 'react-native-paper';
 
 
 const DATA = [
@@ -104,10 +105,13 @@ const DATA = [
 const Item = ({ title, date }) => {
 
     return (
-        <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-            {/* <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>{date.toLocaleDateString()}</Text> */}
-        </View>
+        <Card mode='elevated' style={styles.item} elevation={5} >
+            <Card.Content>
+                <Paper_Text style={styles.title}>{title}</Paper_Text>
+                <Paper_Text style={styles.title}>Jul 23, 2023 at 09:15</Paper_Text>
+            </Card.Content>
+
+        </Card>
     )
 };
 
@@ -141,22 +145,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
         paddingHorizontal: 10,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
     },
     item: {
         backgroundColor: '#fff',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.28,
-        shadowRadius: 8,
-
-        elevation: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 18,
-        marginVertical: 5
+        margin: 5
 
 
     },

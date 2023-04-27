@@ -6,7 +6,7 @@ import { Controller } from "react-hook-form";
 const Input = ({ control, name, label, placeholder, rules, passord = false }) => {
     const [secure, setSecure] = React.useState(true);
 
-
+    //   "react-native-reanimated": "^2.14.4",
 
     return (
         <Controller

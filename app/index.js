@@ -3,7 +3,6 @@ import { SplashScreen } from "expo-router";
 import { Text, View, Image } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import { styles } from "../styles/Style";
-import Splash from "../components/Splash";
 import { useFonts } from 'expo-font';
 import { useRouter } from "expo-router";
 import Button from "../static/Button";
