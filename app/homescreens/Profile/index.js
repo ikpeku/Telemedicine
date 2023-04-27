@@ -4,6 +4,7 @@ import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@exp
 import { Link } from "expo-router";
 import { Avatar, Switch } from 'react-native-paper';
 import Button from '../../../static/Button';
+import CardTag from '../../../components/CardTag';
 
 export default function Profile() {
 
@@ -35,22 +36,13 @@ export default function Profile() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.headerContainer}>
-                    <Avatar.Image size={40}
-                        source={{ uri: "https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960" }} />
-
-                    <View>
-                        <Text style={styles.title}>Collins Jeff</Text>
-                        <Text style={styles.subTitle}>collinsjef655@gmail.com</Text>
-                    </View>
-
-
-                </View>
-
-                <Avatar.Image size={24} source={require('../../../assets/profileIcon.png')} style={{ backgroundColor: "#fff" }} />
-            </View>
-
+            <CardTag
+                title="Collins Jeff"
+                subTitle="collinsjef655@gmail.com"
+                url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
+                rightIcon={<Avatar.Image size={24} source={require('../../../assets/profileIcon.png')}
+                    style={{ backgroundColor: "#fff" }} />}
+            />
 
 
             <View style={{ padding: 10 }}>
