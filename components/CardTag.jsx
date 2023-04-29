@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Avatar, Card } from 'react-native-paper';
 
-const CardTag = ({ mode = "contained", rightIcon, title, subTitle, url, elevation }) => {
+const CardTag = ({ mode = "contained", rightIcon, title, subTitle, url, elevation, onPress }) => {
     return (
-        <Card mode={mode} style={{ backgroundColor: "#fff" }} elevation={elevation} >
+        <Card onPress={onPress} mode={mode} style={[{ backgroundColor: "#fff" }, mode === "elevated" ? { marginBottom: 4, marginTop: 2, marginHorizontal: 3 } : {}]} elevation={elevation} >
             <Card.Content style={styles.header}>
                 <View style={styles.headerContainer}>
                     <Avatar.Image size={40}
@@ -20,7 +20,7 @@ const CardTag = ({ mode = "contained", rightIcon, title, subTitle, url, elevatio
 
                 {rightIcon}
             </Card.Content>
-        </Card>
+        </Card >
     )
 }
 

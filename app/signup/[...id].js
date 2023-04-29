@@ -1,7 +1,6 @@
-import { useState } from "react"
-import { Text, View, Pressable, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Keyboard, Image } from "react-native";
+
+import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
-import { Feather } from '@expo/vector-icons';
 import Button from "../../static/Button";
 import { useForm } from "react-hook-form";
 import Input from "../../static/Input";
@@ -24,8 +23,6 @@ export default function Sign() {
         console.log(data)
     }
 
-    // style={{ paddingBottom: 20 }}
-    // contentContainerStyle={{ paddingBottom: 30 }}
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
@@ -39,13 +36,10 @@ export default function Sign() {
                     }} />
 
 
-                {/* <Pressable onPress={Keyboard.dismiss}> */}
-
-
                 <View style={{ marginTop: 10 }}>
 
                     {pathname === "/signup/register" &&
-                        <Input control={control} label="Full Name" placeholder="Enter Full Name" name="Full_Name" rules={{ required: "Required" }} />
+                        <Input control={control} label="Full Name" placeholder="Enter Full Name" name="Full_Name" rules={{ required: "This field is required" }} />
                     }
 
 
@@ -58,31 +52,12 @@ export default function Sign() {
                     }} />
 
                     {pathname === "/signup/register" &&
-                        <Input control={control} label="Phone Number" placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "Required" }} />
+                        <Input control={control} label="Phone Number" placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "This field is required" }} />
                     }
 
                     <Input control={control} label="Password" placeholder="Enter Password" name="Password"
-                        rules={{ required: true, minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true} />
+                        rules={{ required: "This field is required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true} />
 
-                    {/* {pathname === "/signup/register" &&
-                            <View style={styles.textInputContainer}>
-                                <TextInput placeholder="Full Name" style={styles.input} />
-                            </View>} */}
-
-                    {/* <View style={styles.textInputContainer}>
-                            <TextInput placeholder="Email Address" style={styles.input} />
-                        </View> */}
-
-
-                    {/* {pathname === "/signup/register" && <View style={styles.textInputContainer}>
-                            <TextInput placeholder="Phone Number" style={styles.input} />
-                        </View>} */}
-
-                    {/* <View style={[styles.textInputContainer, styles.password]}>
-                            <TextInput placeholder="Password" secureTextEntry={isvisible} style={styles.input} />
-                            {!isvisible ? <Feather onPress={() => setIsvisible(true)} name="eye-off" size={18} color="rgba(0, 0, 0, 0.35)" style={{ marginLeft: "auto" }} /> :
-                                <Feather onPress={() => setIsvisible(false)} name="eye" size={18} color="rgba(0, 0, 0, 0.35)" style={{ marginLeft: "auto" }} />}
-                        </View> */}
                 </View>
 
 
