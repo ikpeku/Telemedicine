@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { Button, Input } from '../../static';
 import { List, RadioButton } from 'react-native-paper';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const PersonalProfile = () => {
+    const router = useRouter()
 
     const [sex, setSex] = useState("male")
     const [DOB, setDOB] = useState()
@@ -23,6 +25,8 @@ const PersonalProfile = () => {
 
 
     const onSavePress = () => {
+        router.push("../")
+
 
     }
 

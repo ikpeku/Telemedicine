@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { List, RadioButton } from 'react-native-paper';
 import { Button } from '../../static';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const MedicalProfile = () => {
+    const router = useRouter()
 
     const [BloodGroup, setBloodGroup] = useState("O+");
     const [Genetype, setGenetype] = useState("AA");
@@ -17,7 +19,9 @@ const MedicalProfile = () => {
 
 
 
-    const onSavePress = () => { }
+    const onSavePress = () => {
+        router.push("../")
+    }
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
