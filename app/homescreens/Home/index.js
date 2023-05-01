@@ -3,12 +3,15 @@ import { View, FlatList, StyleSheet, } from 'react-native';
 import { Card, Text, Searchbar } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DATA } from "../../../components/data"
+import { useRouter } from 'expo-router';
 
 
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [data, setData] = useState(DATA)
+
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -25,7 +28,7 @@ const Home = () => {
 
     const renderItem = ({ item }) => (
 
-        <Card style={styles.item}>
+        <Card style={styles.item} onPress={() => router.push("./Home/[id]")}>
             <Card.Content style={{ gap: 10 }} >
                 <Text variant='bodyMedium' style={{ backgroundColor: "#E5F6FD", paddingHorizontal: 3, borderRadius: 50, width: 100 }} >{item.catergory}</Text>
                 {item.status && <Text variant='bodyMedium' style={{ backgroundColor: "#7EA5CE", paddingHorizontal: 3, borderRadius: 50, width: 70 }}>Popular</Text>}

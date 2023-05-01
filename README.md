@@ -16,5 +16,3 @@ npx expo start
 ```sh
 npx expo start -c
 ```
-##### This is a test run push
-
