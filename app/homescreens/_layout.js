@@ -15,9 +15,9 @@ export default function Layout() {
     }
 
 
-    return (<Tabs screenOptions={{ headerShown: false, tabBarLabelStyle: { fontSize: 13, fontWeight: "500" } }}>
+    return (<Tabs screenOptions={{ headerShown: false, tabBarLabelStyle: { fontSize: 11, }, tabBarIcon: { size: 20 } }}>
         <Tabs.Screen name="Home" options={{ tabBarIcon: ({ size, color }) => <HomeLog size={size} color={color} /> }} />
-        <Tabs.Screen name="Consultation" options={{ tabBarIcon: ({ size, color, focused }) => <MaterialCommunityIcons name="plus-outline" size={size} color={color} /> }} />
+        <Tabs.Screen name="Consultation" options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="plus-outline" size={size} color={color} /> }} />
         <Tabs.Screen name="Notification" options={{
             headerShown: true,
             title: "Notifications",

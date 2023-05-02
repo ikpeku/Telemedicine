@@ -40,7 +40,7 @@ export default function Consultation() {
                         // elevation={1}
                         onPress={() => router.push("/homescreens/Consultation/Appointment")}
                         title="Collins Jeff"
-                        subTitle="collinsjef655@gmail.com"
+                        subTitle="Endocrinologists"
                         url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
                         rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
                     />}

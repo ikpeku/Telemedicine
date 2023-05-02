@@ -28,7 +28,7 @@ const Home = () => {
 
     const renderItem = ({ item }) => (
 
-        <Card style={styles.item} onPress={() => router.push("./Home/[id]")}>
+        <Card style={styles.item} onPress={() => router.push(`./Home/${item.id}`)}>
             <Card.Content style={{ gap: 10 }} >
                 <Text variant='bodyMedium' style={{ backgroundColor: "#E5F6FD", paddingHorizontal: 3, borderRadius: 50, width: 100 }} >{item.catergory}</Text>
                 {item.status && <Text variant='bodyMedium' style={{ backgroundColor: "#7EA5CE", paddingHorizontal: 3, borderRadius: 50, width: 70 }}>Popular</Text>}
@@ -77,9 +77,8 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         margin: 10,
-        height: 150,
+        // height: 100,
         backgroundColor: '#fff',
-        justifyContent: 'center',
     },
     title: {
         fontSize: 32,
