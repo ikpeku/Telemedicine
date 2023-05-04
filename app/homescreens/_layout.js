@@ -15,9 +15,9 @@ export default function Layout() {
     }
 
 
-    return (<Tabs screenOptions={{ headerShown: false, tabBarLabelStyle: { fontSize: 11, }, tabBarIcon: { size: 20 } }}>
-        <Tabs.Screen name="Home" options={{ tabBarIcon: ({ size, color }) => <HomeLog size={size} color={color} /> }} />
-        <Tabs.Screen name="Consultation" options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="plus-outline" size={size} color={color} /> }} />
+    return (<Tabs screenOptions={{ headerShown: false, tabBarLabelStyle: { fontSize: 11, }, }}>
+        <Tabs.Screen name="Home" options={{ tabBarIcon: ({ size, color }) => <HomeLog size={20} color={color} /> }} />
+        <Tabs.Screen name="Consultation" options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="plus-outline" size={25} color={color} /> }} />
         <Tabs.Screen name="Notification" options={{
             headerShown: true,
             title: "Notifications",
@@ -28,8 +28,8 @@ export default function Layout() {
                 fontWeight: 900,
                 fontSize: 20,
             },
-            tabBarIcon: ({ size, color }) => <SimpleLineIcons name="bell" size={size} color={color} />
+            tabBarIcon: ({ size, color }) => <SimpleLineIcons name="bell" size={20} color={color} />
         }} />
-        <Tabs.Screen name="Profile" options={{ tabBarIcon: ({ size, color }) => <MaterialIcons name="person-outline" size={size} color={color} /> }} />
+        <Tabs.Screen name="Profile" options={{ tabBarIcon: ({ size, color }) => <MaterialIcons name="person-outline" size={25} color={color} /> }} />
     </Tabs>)
 }   

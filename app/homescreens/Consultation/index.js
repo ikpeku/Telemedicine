@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { StyleSheet, FlatList, View, Keyboard, Pressable } from 'react-native'
+import { useState, useEffect } from 'react';
+import { StyleSheet, FlatList, View, Keyboard, Image } from 'react-native'
 import { Text, Searchbar } from 'react-native-paper';
 import CardTag from '../../../components/CardTag';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Doctors } from '../../../components/data';
 
 
 
@@ -13,13 +14,26 @@ export default function Consultation() {
     const router = useRouter()
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [data, setData] = useState(Doctors)
+
+
+    useEffect(() => {
+
+        if (!searchQuery) {
+            setData(Doctors)
+        } else {
+            setData(Doctors.filter(item => item.Name.toLowerCase().includes(searchQuery.toLowerCase()) || item.expert.toLowerCase().includes(searchQuery.toLowerCase())))
+        }
+
+    }, [searchQuery])
+
     return (
-        <SafeAreaView style={styles.root}>
-            <Pressable onPress={Keyboard.dismiss}>
+        <SafeAreaView style={styles.root} >
 
-                <Stack.Screen options={{ headerShown: false }} />
-
-                <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro" }}>
+            <Stack.Screen options={{ headerShown: false }} />
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                <Image source={require('../../../assets/logo.png')} style={{}} />
+                <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro", flex: 1 }}>
                     <Searchbar
                         placeholder="Search for a doctor"
                         onChangeText={(event) => setSearchQuery(event)}
@@ -27,28 +41,32 @@ export default function Consultation() {
                         style={{ width: "100%", backgroundColor: "#fff" }}
                     />
                 </View>
+            </View>
 
-                <Text variant='titleMedium'
-                    style={{ textAlign: "center", fontWeight: "bold", fontFamily: 'Avenir', paddingHorizontal: 5, paddingVertical: 20 }}
-                >Book an appointment with a doctor</Text>
+            <Text variant='titleMedium'
+                onPress={Keyboard.dismiss}
+                style={{ textAlign: "center", fontWeight: "bold", fontFamily: 'Avenir', paddingHorizontal: 5, paddingVertical: 10 }}
+            >Book an appointment with a doctor</Text>
 
 
-                <FlatList
-                    data={Array(10)}
-                    renderItem={({ item }) => <CardTag
-                        mode='elevated'
-                        // elevation={1}
-                        onPress={() => router.push("/homescreens/Consultation/Appointment")}
-                        title="Collins Jeff"
-                        subTitle="Endocrinologists"
-                        url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
-                        rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
-                    />}
-                    // keyExtractor={item => item.id}
-                    showsVerticalScrollIndicator={false}
-                />
-            </Pressable>
-        </SafeAreaView>
+            <FlatList
+                data={data}
+                renderItem={({ item }) => <CardTag
+                    mode='elevated'
+                    // elevation={1}
+                    onPress={() => router.push({ pathname: "./Consultation/appointment", params: { id: item.id } })}
+                    title={item.Name}
+                    subTitle={item.expert}
+                    url={item.img}
+                    rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                />}
+                keyExtractor={item => item.id}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ gap: 10 }}
+            />
+
+
+        </SafeAreaView >
     )
 }
 
@@ -56,8 +74,6 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingHorizontal: 10,
-        marginTop: 20,
-        paddingBottom: 50
+        padding: 10
     }
 })

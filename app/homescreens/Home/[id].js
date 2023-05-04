@@ -73,7 +73,8 @@ const User = () => {
                 </View>
 
                 <View style={{ marginTop: 50 }}>
-                    <Button onPress={() => router.push("./questionnaire")} title="Get started" />
+
+                    <Button onPress={() => router.push({ pathname: "./questionnaire", params: { id } })} title="Get started" />
                 </View>
 
             </View>

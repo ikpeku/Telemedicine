@@ -2,7 +2,7 @@
 import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
-import { useForm } from "react-hook-form";
+d
 import Input from "../../static/Input";
 
 export default function Sign() {

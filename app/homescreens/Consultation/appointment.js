@@ -1,24 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Stack } from 'expo-router'
+import { Stack, useSearchParams } from 'expo-router'
 import CardTag from '../../../components/CardTag'
 import { Ionicons } from '@expo/vector-icons';
 import { Card, Text, Modal, Portal, Provider } from 'react-native-paper';
 import Button from '../../../static/Button';
+import { Doctors } from '../../../components/data';
 
 const Appointment = () => {
     const [visible, setVisible] = useState(false);
     const [star, setStar] = useState(0);
+    const [data, setData] = useState({})
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
 
+    const { id } = useSearchParams()
+
+    // console.log(Doctors.find(value => value.id === +id))
+
+    useEffect(() => {
+        setData(Doctors.find(value => value.id === +id))
+
+    }, [])
+
+
+    console.log(data)
 
 
     return (
         < Provider >
             <View style={styles.root}>
                 <Stack.Screen options={{ title: "Book Appointment" }} />
+
 
 
                 <Portal>

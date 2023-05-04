@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet, } from 'react-native';
+import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { Card, Text, Searchbar } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DATA } from "../../../components/data"
@@ -43,13 +43,16 @@ const Home = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro", marginBottom: 20 }}>
-                <Searchbar
-                    placeholder="Search for illness"
-                    onChangeText={(event) => setSearchQuery(event)}
-                    value={searchQuery}
-                    style={{ width: "100%", backgroundColor: "#fff" }}
-                />
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                <Image source={require('../../../assets/logo.png')} style={{}} />
+                <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro", flex: 1 }}>
+                    <Searchbar
+                        placeholder="Search for illness"
+                        onChangeText={(event) => setSearchQuery(event)}
+                        value={searchQuery}
+                        style={{ width: "100%", backgroundColor: "#fff" }}
+                    />
+                </View>
             </View>
 
             <FlatList
@@ -77,7 +80,6 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         margin: 10,
-        // height: 100,
         backgroundColor: '#fff',
     },
     title: {
