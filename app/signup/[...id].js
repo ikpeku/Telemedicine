@@ -1,9 +1,10 @@
-
+import { useCallback } from "react";
 import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
 import Input from "../../static/Input";
 import { useForm } from "react-hook-form";
+import { Auth } from "aws-amplify";
 
 export default function Sign() {
     const pathname = usePathname();
@@ -21,7 +22,13 @@ export default function Sign() {
 
     const onFormSubmit = (data) => {
         console.log(data)
+        // Auth.signUp({ password, attributes: { email: data.Email_Address } })
     }
+
+    const signin = useCallback(async () => {
+        await Auth.federatedSignIn({ provider: "Google" });
+
+    }, []);
 
 
     return (
@@ -87,7 +94,8 @@ export default function Sign() {
                     title={pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}
                     icon={true}
                     type="secondary"
-                    onPress={() => router.push("/homescreens/")}
+                    // onPress={() => router.push("/homescreens/")}
+                    onPress={signin}
                 />
 
 
