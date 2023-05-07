@@ -1,7 +1,10 @@
 import { Text, StyleSheet } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Amplify } from "aws-amplify";
+import config from "../src/aws-exports"
 
+Amplify.configure(config)
 
 
 const App = () => {

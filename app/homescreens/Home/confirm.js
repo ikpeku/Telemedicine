@@ -2,14 +2,14 @@ import { Text, View, Image } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import { styles } from "../../../styles/Style";
 
-import { useRouter } from "expo-router";
+import { useNavigation } from "expo-router";
 import Button from "../../../static/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function Page() {
 
-    const router = useRouter();
+    const navigate = useNavigation()
 
 
     return (
@@ -33,7 +33,7 @@ export default function Page() {
                         <Text style={styles.text}>Our medical expertise will review your questionnaire and send treatment for your conditionOur medical expertise will review your questionnaire and send treatment for your condition</Text>
                     </View>
 
-                    <Button title="Processed to make payment" onPress={() => router.push("/")} />
+                    <Button title="Processed to make payment" onPress={() => navigate.popToTop()} />
                 </View>
 
             </View>

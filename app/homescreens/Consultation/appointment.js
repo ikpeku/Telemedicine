@@ -25,7 +25,7 @@ const Appointment = () => {
     }, [])
 
 
-    console.log(data)
+    // console.log(data)
 
 
     return (
@@ -56,27 +56,23 @@ const Appointment = () => {
 
 
                 <CardTag
-                    title="Collins Jeff"
-                    subTitle="collinsjef655@gmail.com"
-                    url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
+                    title={data?.Name}
+                    subTitle={data?.expert}
+                    url={data?.img}
 
                 />
 
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 15, backgroundColor: "#fff" }}>
                     <Ionicons name="md-star" size={24} color="#FFCE31" />
-                    <Text variant='bodySmall'>4.5</Text>
+                    <Text variant='bodySmall'>{data?.rate}</Text>
                     <Text onPress={showModal} variant='bodyMedium' style={{ backgroundColor: "#0665CB", color: "#fff", borderRadius: 4, paddingHorizontal: 5 }}>Rate this doctor</Text>
                 </View>
 
                 <View>
                     <Card style={{ backgroundColor: "#fff" }} mode='contained' >
                         <Card.Content>
-                            <Text variant='headlineMedium' style={{ fontFamily: 'Avenir', fontWeight: 900 }} >About</Text>
-                            <Text variant='bodyLarge'>
-                                Dr. Smith is a 45-year-old physician with over
-                                15 years of experience in the medical field. She received her medical degree from a top-ranked university
-                                and completed her residency at a leading teaching hospital.
-                            </Text>
+                            <Text variant='headlineMedium' style={{ fontFamily: 'Avenir', }} >About</Text>
+                            <Text variant='bodyLarge'>{data?.about}</Text>
                         </Card.Content>
                     </Card>
                 </View>
@@ -84,7 +80,7 @@ const Appointment = () => {
                 <View>
                     <Card style={{ backgroundColor: "#fff" }} mode='contained' >
                         <Card.Content>
-                            <Text variant='headlineSmall' style={{ fontFamily: 'Avenir', fontWeight: 900 }} >Select date</Text>
+                            <Text variant='headlineSmall' style={{ fontFamily: 'Avenir' }} >Select date</Text>
 
                         </Card.Content>
                     </Card>

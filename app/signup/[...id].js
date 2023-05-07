@@ -2,8 +2,8 @@
 import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
-d
 import Input from "../../static/Input";
+import { useForm } from "react-hook-form";
 
 export default function Sign() {
     const pathname = usePathname();
