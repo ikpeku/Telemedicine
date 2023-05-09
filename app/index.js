@@ -17,8 +17,8 @@ export default function Page() {
   const router = useRouter();
 
   const [fontsLoaded] = useFonts({
-    'Nunito': require('../assets/Nunito/Nunito-VariableFont_wght.ttf'),
     'Lato': require('../assets/Lato/Lato-Black.ttf'),
+    'Nunito': require('../assets/Nunito/Nunito-VariableFont_wght.ttf'),
     'Avenir': require('../assets/Avenir-Font/avenir_ff/AvenirLTStd-Roman.otf'),
   });
 

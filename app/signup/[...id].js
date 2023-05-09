@@ -20,9 +20,15 @@ export default function Sign() {
     });
 
 
-    const onFormSubmit = (data) => {
+    const onFormSubmit = async (data) => {
         console.log(data)
         // Auth.signUp({ password, attributes: { email: data.Email_Address } })
+
+        if (pathname === "/signup/login") {
+            const response = await Auth.signIn({ username: data?.Email_Address, password: data?.Password })
+            console.log(response)
+
+        }
     }
 
     const signin = useCallback(async () => {

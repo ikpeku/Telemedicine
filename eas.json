@@ -1,0 +1,45 @@
+{
+  "cli": {
+    "version": ">= 3.11.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+
+    // "build": {
+    //   "preview": {
+    //     "android": {
+    //       "buildType": "apk"
+    //     }
+    //   },
+    //   "preview2": {
+    //     "android": {
+    //       "gradleCommand": ":app:assembleRelease"
+    //     }
+    //   },
+    //   "preview3": {
+    //     "developmentClient": true
+    //   },
+    //   "production": {}
+    // }
+
+  
+}

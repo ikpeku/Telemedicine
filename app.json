@@ -1,9 +1,19 @@
 {
   "expo": {
     "scheme": "embodiment",
-    "web": { "bundler": "metro" }
+    "web": {
+      "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f15ded57-21a5-4383-8659-a7a0620d410b"
+      }
+    },
+    "android": {
+      "package": "com.embodiment"
+    },
+    "ios": {
+      "bundleIdentifier": "com.embodiment"
+    }
   }
 }
-
-
-// "scheme": "acme",
