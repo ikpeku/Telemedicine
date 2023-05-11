@@ -1,16 +1,21 @@
-import { useCallback } from "react";
-import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
+import { useCallback, useState } from "react";
+import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
 import Input from "../../static/Input";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+
+
 
 export default function Sign() {
+
     const pathname = usePathname();
+    const [loading, setLoadig] = useState(false)
 
     const router = useRouter();
-    const { handleSubmit, control } = useForm({
+    const { handleSubmit, control, watch } = useForm({
         defaultValues: {
             Full_Name: "",
             Email_Address: "",
@@ -19,22 +24,58 @@ export default function Sign() {
         }
     });
 
+    const email = watch("Email_Address")
+
 
     const onFormSubmit = async (data) => {
-        console.log(data)
-        // Auth.signUp({ password, attributes: { email: data.Email_Address } })
+        if (loading) return
+        setLoadig(true)
 
-        if (pathname === "/signup/login") {
-            const response = await Auth.signIn({ username: data?.Email_Address, password: data?.Password })
-            console.log(response)
+
+        try {
+
+            if (pathname === "/signup/login") {
+                await Auth.signIn(data.Email_Address, data.Password)
+            } else {
+                await Auth.signUp({ username: data?.Email_Address, password: data?.Password, attributes: { email: data.Email_Address, phone_number: data?.Phone_Number, name: data.Full_Name }, autoSignIn: { enabled: true } })
+                // console.log('home', data.Email_Address)
+                router.push({ pathname: "/signup/confirmEmail", params: { email: data.Email_Address } })
+
+            }
+
+
+
+        } catch (error) {
+            if (error.message === "User is not confirmed.") {
+                return router.push({ pathname: "/signup/confirmEmail", params: { email: data.Email_Address } })
+            }
+            // console.log(error.message)
+            Alert.alert("Error", error.message)
+
+        } finally {
+            setLoadig(false)
 
         }
     }
 
     const signin = useCallback(async () => {
-        await Auth.federatedSignIn({ provider: "Google" });
+        try {
+            await Auth.federatedSignIn({ provider: "Google" });
+        } catch (error) {
+            Alert.alert("Error", error.message)
+        }
 
     }, []);
+
+
+
+    if (loading) {
+        return (
+            <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0, 0.1)" }]}>
+                <ActivityIndicator animating={true} size={"large"} color={MD2Colors.greenA700} />
+            </View>
+        )
+    }
 
 
     return (
@@ -57,7 +98,7 @@ export default function Sign() {
 
 
 
-                    <Input control={control} label="Email Address" placeholder="Enter Email" name=" Email_Address" rules={{
+                    <Input control={control} label="Email Address" placeholder="Enter Email" name="Email_Address" rules={{
                         required: "This field is required.", pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             message: 'Enter a valid e-mail address',
@@ -69,7 +110,9 @@ export default function Sign() {
                     }
 
                     <Input control={control} label="Password" placeholder="Enter Password" name="Password"
-                        rules={{ required: "This field is required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true} />
+                        rules={{ required: "This field is required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true}
+                    />
+                    <Text style={[styles.cta, { textAlign: "left", color: "#0665CB" }]} onPress={() => router.push({ pathname: "/signup/forgotPassword", params: { email } })} >Forget Password</Text>
 
                 </View>
 

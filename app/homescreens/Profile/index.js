@@ -5,6 +5,7 @@ import { Link } from "expo-router";
 import { Avatar, Switch } from 'react-native-paper';
 import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
+import { Auth } from 'aws-amplify';
 
 export default function Profile() {
 
@@ -13,10 +14,10 @@ export default function Profile() {
 
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
-    const Item = ({ path, leftIcon, rightIcon, title, signout = false }) => {
+    const Item = ({ path, leftIcon, rightIcon, title, signout = false, onPress }) => {
         return (
             <Link href={{ pathname: path }} asChild>
-                <Pressable>
+                <Pressable onPress={onPress}>
                     <View style={[styles.switchContainer, signout ? {} : { borderTopWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
 
@@ -99,6 +100,7 @@ export default function Profile() {
                     title="Sign out"
                     leftIcon={<Ionicons name="ios-exit-outline" size={24} color="#EA4335" />}
                     signout={true}
+                    onPress={() => Auth.signOut()}
                 />
             </View>
 
