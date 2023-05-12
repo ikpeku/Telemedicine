@@ -1,15 +1,20 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, ScrollView, Platform, Keyboard, Pressable } from 'react-native'
-
+import { useState } from 'react';
+import { StyleSheet, Text, View, KeyboardAvoidingView, ScrollView, Platform, } from 'react-native'
 import { useForm } from "react-hook-form";
 import Input from '../../../static/Input';
 import Button from '../../../static/Button';
+import { Auth } from 'aws-amplify';
+import { useSearchParams, useNavigation } from 'expo-router'
+
 
 export default function password() {
-
-
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigation()
+    const { email } = useSearchParams()
+    // console.log(email)
     const { handleSubmit, control, watch } = useForm({
         defaultValues: {
-            Old_password: "",
+            code: "",
             New_Password: "",
             Confirm_Password: "",
         }
@@ -18,8 +23,18 @@ export default function password() {
     const New_Password = watch("New_Password")
 
 
-    const onSavePassword = (data) => {
-        console.log(data)
+    const onSavePassword = async (data) => {
+        if (loading) return
+        setLoading(true)
+        try {
+            await Auth.forgotPasswordSubmit(email, data.code, data.Password,)
+            navigate.popToTop()
+        } catch (error) {
+            Alert.alert("Error", error.message)
+
+        } finally {
+            setLoading(false)
+        }
     }
 
 
@@ -31,7 +46,8 @@ export default function password() {
                     <Text style={styles.title}>Change password</Text>
                 </View>
 
-                <Input control={control} label="Old password" placeholder="Old password" name="Old_Password" passord={true} rules={{ required: "required" }} />
+                <Input control={control} label="Code" placeholder="Enter Code" name="code" rules={{ required: "required" }} />
+                <Text style={{ color: "green", }}>check email for code</Text>
                 <Input control={control} label="New password" placeholder="New password" name="New_Password" passord={true}
                     rules={{ required: "required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} />
                 <Input control={control} label="Confirm password" placeholder="Confirm password" name="Confirm_Password" passord={true}

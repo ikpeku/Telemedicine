@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import * as MailComposer from 'expo-mail-composer';
 import { FontAwesome5, Feather } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';

@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { Button } from '../../../static'
 import { useRouter } from 'expo-router'
 

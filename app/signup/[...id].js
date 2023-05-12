@@ -6,17 +6,12 @@ import Input from "../../static/Input";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
-import { userProvider } from "../../Context/UserProvider";
-
-
 
 
 export default function Sign() {
 
     const pathname = usePathname();
     const [loading, setLoadig] = useState(false)
-    const { user } = useContext(userProvider)
-
 
 
     const router = useRouter();
@@ -74,22 +69,6 @@ export default function Sign() {
     }, []);
 
 
-
-
-
-
-
-    // console.log(user)
-
-    // useEffect(() => {
-    //     setLoadig(true)
-    //     if (user) {
-    //         console.log("user log sinin")
-    //         router.replace("/homescreens")
-    //     }
-    //     setLoadig(false)
-
-    // }, [user])
 
     if (loading) {
         return (

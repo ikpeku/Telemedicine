@@ -1,13 +1,17 @@
+import React, { useContext, useState } from 'react'
 import { StyleSheet, Text, View, Pressable } from 'react-native'
-import React, { useState } from 'react'
 import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link, useRouter } from "expo-router";
 import { Avatar, Switch } from 'react-native-paper';
 import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
 import { Auth } from 'aws-amplify';
+import { userProvider } from '../../../Context/UserProvider';
 
-export default function Profile() {
+
+
+const Profile = () => {
+    const { user } = useContext(userProvider)
 
     const router = useRouter()
 
@@ -15,9 +19,9 @@ export default function Profile() {
 
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
-    const Item = ({ path, leftIcon, rightIcon, title, signout = false, onPress }) => {
+    const Item = ({ path, leftIcon, rightIcon, title, signout = false, onPress, params }) => {
         return (
-            <Link href={{ pathname: path }} asChild>
+            <Link href={{ pathname: path, params: params }} asChild>
                 <Pressable onPress={onPress}>
                     <View style={[styles.switchContainer, signout ? {} : { borderTopWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flexDirection: "row", gap: 20, alignItems: "center", }}>
@@ -42,12 +46,18 @@ export default function Profile() {
 
     }
 
+    // console.log(user?.attributes?.email)
+
+    const HandlePassword = async () => {
+        await Auth.forgotPassword(user?.attributes?.email)
+    }
+
 
     return (
         <View style={styles.container}>
             <CardTag
-                title="Collins Jeff"
-                subTitle="collinsjef655@gmail.com"
+                title={user?.attributes?.name}
+                subTitle={user?.attributes?.email}
                 url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
                 rightIcon={<Avatar.Image size={24} source={require('../../../assets/profileIcon.png')}
                     style={{ backgroundColor: "#fff" }} />}
@@ -72,7 +82,9 @@ export default function Profile() {
                 title="Password"
                 leftIcon={<MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />}
                 rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
-                path="homescreens/Profile/password"
+                onPress={HandlePassword}
+                path={"homescreens/Profile/password"}
+                params={{ email: user?.attributes?.email }}
             />
 
 
@@ -115,6 +127,8 @@ export default function Profile() {
         </View>
     )
 }
+
+export default Profile
 
 const styles = StyleSheet.create({
     container: {
