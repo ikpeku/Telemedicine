@@ -4,29 +4,29 @@ import { useRouter } from "expo-router";
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 
-export const userProvider = createContext()
+export const userProvider = createContext({ user: undefined })
 
 
 
-const ReducerFxn = (state, action) => {
-    switch (action.type) {
-        case 'signIn':
-        case 'signUp':
-            return { user: action.payload }
-        case 'signOut':
-            return { user: null }
+// const ReducerFxn = (state, action) => {
+//     switch (action.type) {
+//         case 'signIn':
+//         case 'signUp':
+//             return { user: action.payload }
+//         case 'signOut':
+//             return { user: null }
 
-        default:
-            return state
-    }
+//         default:
+//             return state
+//     }
 
-}
+// }
 
-const initialState = {
-    user: undefined,
-    isLoading: false
+// const initialState = {
+//     user: undefined,
+//     isLoading: false
 
-}
+// }
 
 
 
@@ -36,8 +36,9 @@ export const UserContext = ({ children }) => {
     const router = useRouter()
     const { getItem, setItem } = useAsyncStorage('@isNewUser');
 
-    const [state, dispatch] = useReducer(ReducerFxn, initialState)
-    const { user } = state
+    // const [state, dispatch] = useReducer(ReducerFxn, initialState)
+    const [user, setUser] = useState(undefined)
+    // const { user } = state
 
 
     useEffect(() => {
@@ -46,15 +47,17 @@ export const UserContext = ({ children }) => {
             await setItem("true");
             try {
                 const response = await Auth.currentAuthenticatedUser({ bypassCache: true })
+                setUser(response)
 
-                dispatch({ type: "signIn", payload: response })
+                // dispatch({ type: "signIn", payload: response })
             } catch (error) {
-
-                dispatch({ type: "signOut" })
+                setUser(null)
+                // dispatch({ type: "signOut" })
             }
 
-
         }
+
+        checkUser()
 
         const listener = async (data) => {
 
@@ -68,53 +71,16 @@ export const UserContext = ({ children }) => {
 
 
 
-        return () => Hub.listen('auth', listener);
-
-    }, [])
 
 
-
-    useEffect(() => {
-        const getData = async () => {
-            const item = await getItem()
-            console.log(item)
-            if (item && user) {
-                // item previously stored
-
-                router.replace("homescreens");
-                return
-            }
-
-            if (!item && !user) {
-                router.replace("onboarding1");
-                return
-            }
-
-            if (item && user !== null) {
-                router.replace("onboarding3");
-                return
-            }
-
-
-            // try {
-            // } catch(e) {
-            //   // error reading value
-            // }
-        }
-
-        getData()
+        return Hub.listen('auth', listener);
 
     }, [user])
 
 
-
+    // console.log(user)
     return (
-        <userProvider.Provider value={{ ...state }}>{children}</userProvider.Provider>
+        <userProvider.Provider value={{ user }}>{children}</userProvider.Provider>
     )
 }
-
-
-
-
-
 

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Avatar, Switch } from 'react-native-paper';
 import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
@@ -9,6 +9,7 @@ import { Auth } from 'aws-amplify';
 
 export default function Profile() {
 
+    const router = useRouter()
 
     const [isSwitchOn, setIsSwitchOn] = useState(false);
 
@@ -32,6 +33,13 @@ export default function Profile() {
                 </Pressable>
             </Link>
         )
+    }
+
+
+    const HandleSignout = async () => {
+        await Auth.signOut()
+        router.replace("/onboarding3")
+
     }
 
 
@@ -100,7 +108,7 @@ export default function Profile() {
                     title="Sign out"
                     leftIcon={<Ionicons name="ios-exit-outline" size={24} color="#EA4335" />}
                     signout={true}
-                    onPress={() => Auth.signOut()}
+                    onPress={HandleSignout}
                 />
             </View>
 

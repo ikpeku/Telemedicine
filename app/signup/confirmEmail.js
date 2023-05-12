@@ -11,7 +11,7 @@ const confirmEmail = () => {
     const router = useRouter()
     const { email } = useSearchParams()
     const [visible, setVisible] = React.useState(false);
-
+    const [loading, setLoading] = React.useState(false);
 
     const { handleSubmit, control, watch } = useForm({
         defaultValues: {
@@ -25,12 +25,16 @@ const confirmEmail = () => {
 
 
     const onSubmit = async (data) => {
+        if (loading) return
+        setLoading(true)
         try {
             await Auth.confirmSignUp(data.Email, data.code)
-            router.push("/signup/login")
+            router.replace("/homescreens")
         } catch (error) {
             Alert.alert("Error", error.message)
 
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -62,7 +66,8 @@ const confirmEmail = () => {
             }} />
 
 
-            <Button title="Confirm" onPress={handleSubmit(onSubmit)} />
+            {!loading && <Button title="Confirm" onPress={handleSubmit(onSubmit)} />}
+            {loading && <Button title="loading" />}
 
             <Button title="Resend code" type='secondary' onPress={HandleResend} />
 

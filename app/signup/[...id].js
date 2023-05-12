@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect, useContext } from "react";
 import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
@@ -6,6 +6,8 @@ import Input from "../../static/Input";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { userProvider } from "../../Context/UserProvider";
+
 
 
 
@@ -13,6 +15,9 @@ export default function Sign() {
 
     const pathname = usePathname();
     const [loading, setLoadig] = useState(false)
+    const { user } = useContext(userProvider)
+
+
 
     const router = useRouter();
     const { handleSubmit, control, watch } = useForm({
@@ -36,6 +41,7 @@ export default function Sign() {
 
             if (pathname === "/signup/login") {
                 await Auth.signIn(data.Email_Address, data.Password)
+                router.replace("/homescreens")
             } else {
                 await Auth.signUp({ username: data?.Email_Address, password: data?.Password, attributes: { email: data.Email_Address, phone_number: data?.Phone_Number, name: data.Full_Name }, autoSignIn: { enabled: true } })
                 // console.log('home', data.Email_Address)
@@ -69,6 +75,22 @@ export default function Sign() {
 
 
 
+
+
+
+
+    // console.log(user)
+
+    // useEffect(() => {
+    //     setLoadig(true)
+    //     if (user) {
+    //         console.log("user log sinin")
+    //         router.replace("/homescreens")
+    //     }
+    //     setLoadig(false)
+
+    // }, [user])
+
     if (loading) {
         return (
             <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0, 0.1)" }]}>
@@ -76,7 +98,6 @@ export default function Sign() {
             </View>
         )
     }
-
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
