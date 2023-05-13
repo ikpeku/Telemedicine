@@ -44,17 +44,14 @@ export default function Sign() {
 
             }
 
-
+            setLoadig(false)
 
         } catch (error) {
+            setLoadig(false)
             if (error.message === "User is not confirmed.") {
                 return router.push({ pathname: "/signup/confirmEmail", params: { email: data.Email_Address } })
             }
-            // console.log(error.message)
             Alert.alert("Error", error.message)
-
-        } finally {
-            setLoadig(false)
 
         }
     }
@@ -69,14 +66,6 @@ export default function Sign() {
     }, []);
 
 
-
-    if (loading) {
-        return (
-            <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0, 0.1)" }]}>
-                <ActivityIndicator animating={true} size={"large"} color={MD2Colors.greenA700} />
-            </View>
-        )
-    }
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
@@ -148,8 +137,14 @@ export default function Sign() {
                 />
 
 
+
                 {/* </Pressable> */}
             </ScrollView>
+            {loading && (
+                <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", ...StyleSheet.absoluteFill, backgroundColor: "transparent" }]}>
+                    <ActivityIndicator animating={true} size={"large"} color={MD2Colors.greenA700} />
+                </View>
+            )}
         </KeyboardAvoidingView>
 
     )

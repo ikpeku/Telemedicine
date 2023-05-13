@@ -80,7 +80,7 @@ export default [
                     "Yes and my symptoms persisted",
                     "I don’t know",
                 ],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -90,7 +90,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -100,7 +100,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -110,7 +110,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -120,7 +120,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -130,7 +130,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }
@@ -140,7 +140,7 @@ export default [
                 question: "What sex were you assigned to at birth",
                 instruction: "Choose one answer from the options",
                 options: ["Male", "Female"],
-                answer: [""],
+                answer: [],
                 appointment: {
                     pick: "male"
                 }

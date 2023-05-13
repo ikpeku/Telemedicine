@@ -52,8 +52,7 @@ export default function Page() {
     const getData = async () => {
 
         const item = await getItem()
-        // console.log("THis is item", item)
-        console.log("THis is user", user)
+
         if (user !== null && user !== undefined) {
             // item previously stored
 
