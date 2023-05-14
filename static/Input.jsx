@@ -3,7 +3,7 @@ import React from 'react'
 import { TextInput } from 'react-native-paper';
 import { Controller } from "react-hook-form";
 
-const Input = ({ control, name, label, placeholder, rules, passord = false }) => {
+const Input = ({ control, name, label, placeholder, rules, passord = false, editable, multiline, numberOfLines }) => {
     const [secure, setSecure] = React.useState(passord ? true : false);
 
 
@@ -22,6 +22,11 @@ const Input = ({ control, name, label, placeholder, rules, passord = false }) =>
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value}
+                        error={error}
+                        editable={editable}
+                        multiline={multiline}
+                        numberOfLines={numberOfLines}
+
                         right={passord ? <TextInput.Icon icon={secure ? "eye-off" : "eye"} onPress={() => setSecure((current => !current))} /> : null}
                     />
                     {error?.message && <Text style={{ color: "red" }}>{error?.message}</Text>}

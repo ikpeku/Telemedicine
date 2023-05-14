@@ -37,7 +37,7 @@ const PersonalProfile = () => {
     return (
         <>
             <Input control={control} name="Full_Name" placeholder="Enter Full Name" label="Full Name" rules={{ required: "required" }} />
-            <Input control={control} name="Email" placeholder="Enter Email" label="Email" rules={{ required: "required" }} />
+            <Input control={control} name="Email" placeholder="Enter Email" label="Email" rules={{ required: "required" }} editable={false} />
             <Input control={control} name="Phone_Number" placeholder="Enter  Phone Number" label=" Phone Number" rules={{ required: "required" }} />
             <Input control={control} name="Address" placeholder="Enter Address" label="Address" rules={{ required: "required" }} />
 

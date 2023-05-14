@@ -1,35 +1,17 @@
-import { useState } from 'react'
-import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
-import { Avatar, MedicalProfile, PersonalProfile } from '../../../components';
+
+import { StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { Avatar, DoctorProfile } from '../../../components';
 
 
 export default function editprofile() {
-    const [IsMedical, setIsMedical] = useState(false);
-
-
-
-
-
-
-
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 30 }} showsVerticalScrollIndicator={false} >
             <KeyboardAvoidingView style={{ paddingBottom: 20 }} >
-
-                <View style={styles.segmentContainer}>
-                    <Text onPress={() => setIsMedical(false)} style={[!IsMedical ? styles.segmentActive : styles.segmentInvalid]}>Personal</Text>
-                    <Text onPress={() => setIsMedical(true)} style={[IsMedical ? styles.segmentActive : styles.segmentInvalid]}>Medical</Text>
-                </View>
-
-
-                {!IsMedical && <Avatar />}
-                {!IsMedical && <PersonalProfile />}
-                {IsMedical && <MedicalProfile />}
-
-
-
-
+                <Avatar
+                    text={"Upload your profile picture"}
+                    photoUrl={"https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"} />
+                <DoctorProfile />
             </KeyboardAvoidingView>
         </ScrollView>
     )
@@ -60,6 +42,6 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
         flex: 1,
         textAlign: "center"
-    },
+    }
 
 })

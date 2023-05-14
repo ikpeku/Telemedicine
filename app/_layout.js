@@ -22,6 +22,7 @@ const App = () => {
                     <Stack.Screen name='onboarding2' options={{ headerRight: () => <Text style={styles.skip} onPress={() => router.push("onboarding3")}>Skip</Text> }} />
                     <Stack.Screen name='onboarding3' />
                     <Stack.Screen name='homescreens' options={{ headerShown: false }} />
+                    <Stack.Screen name='doctor' options={{ headerShown: false }} />
                 </Stack>
             </UserContext>
         </PaperProvider>

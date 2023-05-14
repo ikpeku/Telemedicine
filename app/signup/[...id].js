@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect, useContext } from "react";
-import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, Alert } from "react-native";
+import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform, Alert, Image } from "react-native";
 import { usePathname, useRouter, Stack, Link } from "expo-router";
 import Button from "../../static/Button";
 import Input from "../../static/Input";
@@ -121,6 +121,13 @@ export default function Sign() {
                     </Link>
                 </View>
 
+                <View style={styles.ctaContainer}>
+                    <Link href={pathname !== "/signup/login" ? "/doctor" : "/doctor"}>
+                        <Text style={styles.ctaBtn}>{pathname !== "/signup/login" ? "Sign Up" : "Sign In"}</Text>
+                    </Link>
+                    <Text style={styles.cta}> as Doctor</Text>
+                </View>
+
                 <View style={styles.lineContainer}>
                     <View style={styles.line} />
                     <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>or</Text>
@@ -130,9 +137,8 @@ export default function Sign() {
                 {/* Google btn */}
                 <Button
                     title={pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}
-                    icon={true}
+                    icon={<Image source={require('../../assets/google.png')} style={{ width: 18, height: 18 }} />}
                     type="secondary"
-                    // onPress={() => router.push("/homescreens/")}
                     onPress={signin}
                 />
 

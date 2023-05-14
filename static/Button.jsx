@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
 
-const Button = ({ onPress, title, type = "primary", icon = false }) => {
+const Button = ({ onPress, title, type = "primary", icon }) => {
     return (
         <Pressable onPress={onPress} style={[styles.splashBtnContainer, styles[`btn_${type}`]]}>
             <View style={styles.IconContainer}>
-                {icon && <Image source={require('../assets/google.png')} style={{ width: 18, height: 18 }} />}
+                {icon && <View>{icon}</View>}
                 <Text style={[styles.BtnText, styles[`btnText_${type}`]]}>{title}</Text>
             </View>
         </Pressable>
@@ -20,15 +20,15 @@ const styles = StyleSheet.create({
         borderRadius: 8,
 
         borderWidth: StyleSheet.hairlineWidth,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
 
-        elevation: 5,
+        // elevation: 5,
         paddingVertical: 15
 
     },
@@ -61,6 +61,14 @@ const styles = StyleSheet.create({
     },
     btnText_textiary: {
         color: "#0665CB"
+    },
+    btn_disable: {
+        backgroundColor: "#fff",
+        borderColor: "rgba(0, 0, 0, 0.8)",
+
+    },
+    btnText_disable: {
+        color: "rgba(0, 0, 0, 0.8)"
     },
     IconContainer: {
         justifyContent: "center",
