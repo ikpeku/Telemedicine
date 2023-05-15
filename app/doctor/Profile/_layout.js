@@ -7,8 +7,6 @@ export default function Layout() {
             <Stack.Screen name="editprofile" options={{ headerTitle: "Edit Profile" }} />
             <Stack.Screen name="help" options={{ headerTitle: "Help & Support" }} />
             <Stack.Screen name="password" options={{ headerTitle: "Password" }} />
-            <Stack.Screen name="Subscribe" options={{ headerTitle: "Subscribe" }} />
-            <Stack.Screen name="Done" options={{ headerShown: false }} />
         </Stack>)
 }
 

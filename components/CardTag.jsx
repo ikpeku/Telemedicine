@@ -39,15 +39,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Avenir',
-        // fontWeight: 500,
-        // fontSize: 24,
-        // lineHeight: 33,
     },
     subTitle: {
-        // fontFamily: 'Avenir',
-        // fontWeight: 400,
-        // fontSize: 14,
-        // lineHeight: 19,
         color: "rgba(0, 0, 0, 0.5)"
     },
 })
