@@ -1,79 +1,108 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, FlatList, View, Keyboard, Image } from 'react-native'
-import { Text, Searchbar } from 'react-native-paper';
-import CardTag from '../../../components/CardTag';
-import { Ionicons } from '@expo/vector-icons';
-import { Stack, useRouter } from 'expo-router';
+import {
+    View,
+    FlatList,
+    StyleSheet,
+} from 'react-native';
+import { Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Doctors } from '../../../components/data';
+import Button from '../../../static/Button';
 
 
 
-
-export default function Consultation() {
-    const router = useRouter()
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const [data, setData] = useState(Doctors)
-
-
-    useEffect(() => {
-
-        if (!searchQuery) {
-            setData(Doctors)
-        } else {
-            setData(Doctors.filter(item => item.Name.toLowerCase().includes(searchQuery.toLowerCase()) || item.expert.toLowerCase().includes(searchQuery.toLowerCase())))
-        }
-
-    }, [searchQuery])
+const Item = ({ title, date }) => {
 
     return (
-        <SafeAreaView style={styles.root} >
-
-            <Stack.Screen options={{ headerShown: false }} />
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <Image source={require('../../../assets/logo.png')} style={{}} />
-                <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro", flex: 1 }}>
-                    <Searchbar
-                        placeholder="Search for a doctor"
-                        onChangeText={(event) => setSearchQuery(event)}
-                        value={searchQuery}
-                        style={{ width: "100%", backgroundColor: "#fff" }}
-                    />
+        <Card mode='contained' style={styles.item} >
+            <Card.Content>
+                <View style={styles.titleContainer}>
+                    <Text variant='titleMedium' style={[styles.title, { color: "#0665CB", }]}>March 12, 2023</Text>
+                    <View style={{ width: 60, padding: 5 }}>
+                        <Text variant='titleMedium' style={[styles.title, styles.btn]}>Edit</Text>
+                    </View>
                 </View>
+
+
+                <View style={{ flexDirection: "row", paddingVertical: 5, gap: 6, flexWrap: "wrap", rowGap: 11, marginTop: 10 }}>
+                    {
+                        ["09:00 am", "10:00 am", "12:00 pm", "02:00 pm", "04:00 pm", "05:00 pm"].map((time, index) => <Text key={index} style={[styles.title, { color: "#0665CB", backgroundColor: "#0665CB14", padding: 5, borderRadius: 8 }]}>{time}</Text>)
+                    }
+                </View>
+            </Card.Content>
+
+        </Card>
+    )
+};
+
+const Empty = () => {
+    return (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <Text>No Appointment</Text>
+        </View>
+    )
+}
+
+
+export default function Appointment() {
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={{ width: "50%", marginLeft: "auto" }}>
+                <Button title={"+ Create appointment"} />
             </View>
 
-            <Text variant='titleMedium'
-                onPress={Keyboard.dismiss}
-                style={{ textAlign: "center", fontWeight: "bold", fontFamily: 'Avenir', paddingHorizontal: 5, paddingVertical: 10 }}
-            >Book an appointment with a doctor</Text>
-
-
             <FlatList
-                data={data}
-                renderItem={({ item }) => <CardTag
-                    mode='elevated'
-                    // elevation={1}
-                    onPress={() => router.push({ pathname: "./Consultation/appointment", params: { id: item.id } })}
-                    title={item.Name}
-                    subTitle={item.expert}
-                    url={item.img}
-                    rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
-                />}
-                keyExtractor={item => item.id}
+                data={Array(10)}
+                renderItem={({ item }) => <Item />}
+                // keyExtractor={item => item.id}
+                ListEmptyComponent={<Empty />}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ gap: 10 }}
             />
 
 
-        </SafeAreaView >
+        </SafeAreaView>
     )
 }
 
+
 const styles = StyleSheet.create({
-    root: {
+    container: {
         flex: 1,
+        alignItems: "center",
+        width: "100%",
+        paddingHorizontal: 10,
         backgroundColor: "#fff",
-        padding: 10
+        paddingVertical: 20,
+        gap: 20
+    },
+    item: {
+        backgroundColor: '#fff',
+        // margin: 5,
+        borderWidth: 0.4,
+        borderColor: "rgba(0,0,0,0.1)",
+        width: "100%"
+
+
+    },
+    title: {
+        fontFamily: 'Avenir',
+
+    },
+    titleContainer: {
+        // flex: 1,
+        flexDirection: "row",
+        flexShrink: 1,
+        flexGrow: 1,
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+        // maxHeight: 20
+    },
+    btn: {
+        backgroundColor: "#0665CB",
+        color: "#fff",
+        textAlign: "center",
+        borderRadius: 5
+
     }
-})
+});
+
