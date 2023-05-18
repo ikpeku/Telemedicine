@@ -11,7 +11,7 @@ const DoctorCard = ({ title, rightIcon, subTitle }) => {
                     {rightIcon}
                 </View>
 
-                <Text variant='headlineMedium' style={[styles.title, { paddingVertical: 10 }]}>{subTitle}</Text>
+                <Text variant='headlineMedium' style={[styles.title, { paddingVertical: 5 }]}>{subTitle}</Text>
             </Card.Content>
         </Card >
     )
@@ -29,13 +29,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#0665CB",
         flexGrow: 1,
         // flexShrink: 1,
+        width: "100%",
         flex: 1
     },
     headerContainer: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        flexWrap: "nowrap"
+        flexWrap: "nowrap",
+        gap: 5
     },
     title: {
         fontFamily: 'Avenir',

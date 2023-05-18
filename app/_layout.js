@@ -23,6 +23,7 @@ const App = () => {
                     <Stack.Screen name='onboarding3' />
                     <Stack.Screen name='homescreens' options={{ headerShown: false }} />
                     <Stack.Screen name='doctor' options={{ headerShown: false }} />
+                    <Stack.Screen name='broad' options={{ headerShown: false }} />
                 </Stack>
             </UserContext>
         </PaperProvider>

@@ -3,11 +3,20 @@ import {
     FlatList,
     StyleSheet,
     Text,
+    TouchableOpacity,
+    Pressable,
 } from 'react-native';
 import { Card, Text as Paper_Text } from 'react-native-paper';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Avatar, DoctorCard } from '../../../components';
+import { AntDesign, FontAwesome5, MaterialCommunityIcons, Feather, FontAwesome } from '@expo/vector-icons';
+import { Avatar, DoctorCard, UseDrawer } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useState } from 'react';
+
+import { Appointment, Candle, Exit, Questionnaire, Users } from '../../assets';
+import { Stack } from 'expo-router';
+
+
 const DATA = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -122,25 +131,38 @@ const Empty = () => {
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <Text>No Notification</Text>
+
         </View>
     )
 }
 
 
+
 export default function Notification() {
+    const [showDrawer, setShowDrawer] = useState(false)
+
     return (
         <SafeAreaView style={styles.container}>
+            <Stack screenOptions={{ headerShown: false }} />
 
-            <View style={{ width: "100%" }}>
+            {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} />}
+
+            <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Avatar
                     type='Start'
                     text={"Hi, Dr. John"}
                     photoUrl={"https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"} />
+                <Feather name="menu" size={24} color="black" onPress={() => setShowDrawer(true)} />
             </View>
 
             <View style={{ width: "100%", flexDirection: "row", gap: 10 }}>
-                <DoctorCard title={"Appointments"} subTitle={"132"} rightIcon={<AntDesign name="calendar" size={20} color="white" />} />
-                <DoctorCard title={"Earnings"} subTitle={"$1,980"} rightIcon={<MaterialCommunityIcons name="cash-multiple" size={20} color="white" />} />
+                <DoctorCard title={"Users"} subTitle={"132"} rightIcon={<Users color="white" />} />
+                <DoctorCard title={"Doctors"} subTitle={"980"} rightIcon={<FontAwesome name="stethoscope" size={24} color="white" />} />
+            </View>
+
+            <View style={{ width: "100%", flexDirection: "row", gap: 10 }}>
+                <DoctorCard title={"Questionnaires"} subTitle={"132"} rightIcon={<Questionnaire color="white" />} />
+                <DoctorCard title={"Appointments"} subTitle={"80"} rightIcon={<Appointment color="white" />} />
             </View>
 
             <View style={{ width: "100%" }}>
@@ -168,7 +190,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: "#fff",
         paddingVertical: 20,
-        gap: 20
+        gap: 20,
+        position: "relative"
     },
     item: {
         backgroundColor: '#fff',
@@ -185,5 +208,6 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         color: "#000",
     },
+
 });
 

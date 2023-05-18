@@ -7,7 +7,7 @@ import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
 import { Auth } from 'aws-amplify';
 import { userProvider } from '../../../Context/UserProvider';
-import { Exit } from '../../../assets';
+import { Exit, Password } from '../../../assets';
 
 
 
@@ -47,8 +47,9 @@ const Profile = () => {
 
 
     const HandlePassword = async () => {
-        await Auth.forgotPassword(user?.attributes?.email)
-        router.push({ params: { email: user?.attributes?.email }, pathname: "./Profile/password" })
+        // await Auth.forgotPassword(user?.attributes?.email)
+        // router.push({ params: { email: user?.attributes?.email }, pathname: "./Profile/password" })
+        router.push({ params: { email: user?.attributes?.email }, pathname: "./Profile/resetpassword" })
     }
 
 
@@ -76,19 +77,10 @@ const Profile = () => {
             {/* Password */}
             <Item
                 title="Password"
-                leftIcon={<MaterialCommunityIcons name="form-textbox-password" size={20} color="#0665CB" />}
+                leftIcon={<Password />}
                 rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
                 onPress={HandlePassword}
 
-            />
-
-
-            {/* help */}
-            <Item
-                title="Help & Support"
-                leftIcon={<SimpleLineIcons name="earphones-alt" size={20} color="#0665CB" />}
-                rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
-                onPress={() => router.push({ pathname: "./Profile/help" })}
             />
 
 
@@ -98,8 +90,6 @@ const Profile = () => {
                 leftIcon={<Feather name="bell" size={20} color="#0665CB" />}
                 rightIcon={<Switch color='#0665CB' value={isSwitchOn} onValueChange={onToggleSwitch} />}
             />
-
-
 
             {/* Exit */}
             <View style={[{ marginTop: "auto" }]}>
@@ -122,30 +112,30 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff"
     },
-    header: {
-        padding: 20,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
-    headerContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 10,
-    },
+    // header: {
+    //     padding: 20,
+    //     flexDirection: "row",
+    //     justifyContent: "space-between",
+    //     alignItems: "center"
+    // },
+    // headerContainer: {
+    //     flexDirection: "row",
+    //     alignItems: "center",
+    //     gap: 10,
+    // },
     title: {
         fontFamily: 'Avenir',
         fontWeight: 500,
         fontSize: 24,
         lineHeight: 33,
     },
-    subTitle: {
-        fontFamily: 'Avenir',
-        fontWeight: 400,
-        fontSize: 14,
-        lineHeight: 19,
-        color: "rgba(0, 0, 0, 0.5)"
-    },
+    // subTitle: {
+    //     fontFamily: 'Avenir',
+    //     fontWeight: 400,
+    //     fontSize: 14,
+    //     lineHeight: 19,
+    //     color: "rgba(0, 0, 0, 0.5)"
+    // },
     cta: {
         fontFamily: 'Avenir',
         fontWeight: "500",

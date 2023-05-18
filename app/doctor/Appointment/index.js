@@ -6,7 +6,8 @@ import {
 import { Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../../static/Button';
-
+import { useRouter } from 'expo-router';
+import { Entypo } from '@expo/vector-icons';
 
 
 const Item = ({ title, date }) => {
@@ -24,7 +25,7 @@ const Item = ({ title, date }) => {
 
                 <View style={{ flexDirection: "row", paddingVertical: 5, gap: 6, flexWrap: "wrap", rowGap: 11, marginTop: 10 }}>
                     {
-                        ["09:00 am", "10:00 am", "12:00 pm", "02:00 pm", "04:00 pm", "05:00 pm"].map((time, index) => <Text key={index} style={[styles.title, { color: "#0665CB", backgroundColor: "#0665CB14", padding: 5, borderRadius: 8 }]}>{time}</Text>)
+                        ["09:00 am", "10:00 am", "12:00 pm", "02:00 pm", "04:00 pm", "05:00 pm"].map((time, index) => <Text key={index} style={[styles.title, { color: "#000", backgroundColor: "#0665CB14", padding: 5, borderRadius: 8 }]}>{time}</Text>)
                     }
                 </View>
             </Card.Content>
@@ -35,22 +36,25 @@ const Item = ({ title, date }) => {
 
 const Empty = () => {
     return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Text>No Appointment</Text>
+        <View style={{ alignItems: "center", justifyContent: "center", aspectRatio: 1, width: "100%" }}>
+            <Entypo name="add-to-list" size={200} color="gainsboro" />
+
+            <Text variant='headlineLarge' style={{ color: "gainsboro", textAlign: "center" }} >No Appointment</Text>
         </View>
     )
 }
 
 
 export default function Appointment() {
+    const router = useRouter()
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ width: "50%", marginLeft: "auto" }}>
-                <Button title={"+ Create appointment"} />
+                <Button title={"+ Create appointment"} onPress={() => router.push("./Appointment/appointment")} />
             </View>
 
             <FlatList
-                data={Array(10)}
+                data={Array(5)}
                 renderItem={({ item }) => <Item />}
                 // keyExtractor={item => item.id}
                 ListEmptyComponent={<Empty />}

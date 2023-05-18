@@ -7,6 +7,7 @@ import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
 import { Auth } from 'aws-amplify';
 import { userProvider } from '../../../Context/UserProvider';
+import { Exit } from '../../../assets';
 
 
 
@@ -118,7 +119,7 @@ const Profile = () => {
             <View style={[{ marginTop: "auto" }]}>
                 <Item
                     title="Sign out"
-                    leftIcon={<Ionicons name="ios-exit-outline" size={24} color="#EA4335" />}
+                    leftIcon={<Exit color="#EA4335" />}
                     signout={true}
                     onPress={HandleSignout}
                 />

@@ -127,6 +127,14 @@ export default function Sign() {
                     </Link>
                     <Text style={styles.cta}> as Doctor</Text>
                 </View>
+                {/*DOctor */}
+                <View style={styles.ctaContainer}>
+                    <Text style={styles.cta}>Admin</Text>
+                    <Link href={pathname !== "/signup/login" ? "/broad" : "/broad"}>
+                        <Text style={styles.ctaBtn}>{pathname !== "/signup/login" ? "Sign Up" : "Sign In"}</Text>
+                    </Link>
+                </View>
+
 
                 <View style={styles.lineContainer}>
                     <View style={styles.line} />
