@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import { Avatar, MedicalProfile, PersonalProfile } from '../../../components';
+import { TextInput } from 'react-native-paper';
 
 
 export default function editprofile() {
@@ -17,17 +18,21 @@ export default function editprofile() {
         <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 30 }} showsVerticalScrollIndicator={false} >
             <KeyboardAvoidingView style={{ paddingBottom: 20 }} >
 
+
                 <View style={styles.segmentContainer}>
                     <Text onPress={() => setIsMedical(false)} style={[!IsMedical ? styles.segmentActive : styles.segmentInvalid]}>Personal</Text>
                     <Text onPress={() => setIsMedical(true)} style={[IsMedical ? styles.segmentActive : styles.segmentInvalid]}>Medical</Text>
                 </View>
 
 
-                {!IsMedical && <Avatar
-                    text={"Upload your profile picture"}
-                    photoUrl={"https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"} />}
-                {!IsMedical && <PersonalProfile />}
-                {IsMedical && <MedicalProfile />}
+                {!IsMedical && <Avatar photoUrl={"https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"} />}
+
+                {
+                    !IsMedical && [1, 2, 3, 4, 5].map(item => <TextInput mode='outlined' disabled key={item} style={{ marginBottom: 5, backgroundColor: "white" }} />)
+                }
+                {
+                    IsMedical && [1, 2, 3, 4, 5].map(item => <TextInput mode='outlined' disabled key={item} style={{ marginBottom: 5, backgroundColor: "white" }} />)
+                }
 
 
 

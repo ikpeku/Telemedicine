@@ -178,7 +178,7 @@ export default function Notification() {
         <SafeAreaView style={styles.container}>
             <Stack screenOptions={{ headerShown: false }} />
 
-            {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} active='Users' />}
+            {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} active='Questionnaires' />}
 
             <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Avatar
@@ -189,12 +189,10 @@ export default function Notification() {
             </View>
 
             <View style={{ width: "100%", flexDirection: "row" }}>
-                <DoctorCard title={"Users"} subTitle={"132"} rightIcon={<Users color="white" />} />
+                <DoctorCard title={"Questionnaire"} subTitle={"332"} rightIcon={<Questionnaire color="white" />} />
             </View>
 
             <View style={{ width: "100%" }}>
-                {/* <DoctorCard title={"Questionnaires"} subTitle={"132"} rightIcon={<Questionnaire color="white" />} />
-                <DoctorCard title={"Appointments"} subTitle={"80"} rightIcon={<Appointment color="white" />} /> */}
 
                 <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro" }}>
                     <Searchbar

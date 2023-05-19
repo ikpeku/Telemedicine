@@ -8,13 +8,17 @@ import {
 } from 'react-native';
 import { Card, Text as Paper_Text } from 'react-native-paper';
 import { AntDesign, FontAwesome5, MaterialCommunityIcons, Feather, FontAwesome } from '@expo/vector-icons';
-import { Avatar, DoctorCard, UseDrawer } from '../../components';
+// import { Avatar, DoctorCard, UseDrawer } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useState } from 'react';
 
-import { Appointment, Candle, Exit, Questionnaire, Users } from '../../assets';
+// import { Appointment, Candle, Exit, Questionnaire, Users } from '../../assets';
 import { Stack } from 'expo-router';
+// import { Avatar } from '../../../components';
+// import { Appointment } from '../../../assets';
+import { Appointment, Candle, Exit, Questionnaire, Users } from '../../../assets';
+import { Avatar, DoctorCard, UseDrawer } from '../../../components';
 
 
 const DATA = [

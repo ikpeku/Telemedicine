@@ -1,17 +1,24 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Avatar, Card, Text } from 'react-native-paper';
+import { Button } from '../static';
 
-const DoctorCard = ({ title, rightIcon, subTitle }) => {
+const DoctorCard = ({ title, rightIcon, subTitle, isDoctor = false }) => {
     return (
         <Card style={styles.header}>
             <Card.Content >
-                <View style={styles.headerContainer}>
-                    <Text variant='titleMedium' style={styles.title}>{title}</Text>
+                <View style={[styles.headerContainer, { paddingBottom: 5 }]}>
+                    <Text variant='titleMedium' style={[styles.title, { color: "white" }]}>{title}</Text>
                     {rightIcon}
                 </View>
+                <View style={styles.headerContainer}>
+                    <Text variant='headlineMedium' style={[styles.title, { paddingVertical: 5, color: "white" }]}>{subTitle}</Text>
 
-                <Text variant='headlineMedium' style={[styles.title, { paddingVertical: 5 }]}>{subTitle}</Text>
+                    {isDoctor && < TouchableOpacity onPress={() => { }}>
+                        <Text style={[styles.title,
+                        { color: "#0665CB", backgroundColor: "white", borderRadius: 15, paddingVertical: 10, paddingHorizontal: 18 }]}>+ Invite Doctor</Text>
+                    </TouchableOpacity>}
+                </View>
             </Card.Content>
         </Card >
     )
@@ -41,6 +48,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Avenir',
-        color: "white"
+
     },
 })

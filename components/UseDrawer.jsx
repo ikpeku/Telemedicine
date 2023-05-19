@@ -38,6 +38,12 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     active={active === 'Overview'}
                     disabled={true}
                     icon={<Candle />}
+                    onPress={() => {
+
+                        router.push("broad/Home")
+                        setShowDrawer(false)
+                        // navigate.navigate("Home")
+                    }}
                 />
 
                 <View
@@ -55,8 +61,8 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     label="Users"
                     active={active === 'Users'}
                     onPress={() => {
-                        setShowDrawer(false)
                         router.push("broad/Users")
+                        setShowDrawer(false)
 
                     }}
                     icon={<Users color={active === 'Users' ? "#0665CB" : "white"} />}
@@ -66,6 +72,7 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     label="Doctors"
                     active={active === 'Doctors'}
                     onPress={() => {
+                        router.push("broad/Doctors")
                         setShowDrawer(false)
                     }}
                     icon={<FontAwesome name="stethoscope" size={22} color={active === 'Doctors' ? "#0665CB" : "white"} />}
@@ -75,6 +82,7 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     label="Questionnaires"
                     active={active === 'Questionnaires'}
                     onPress={() => {
+                        router.push("broad/Questionnaire")
                         setShowDrawer(false)
                     }}
                     icon={<Questionnaire color={active === 'Questionnaires' ? "#0665CB" : "white"} />}
@@ -83,6 +91,7 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     label="Appointments"
                     active={active === 'Appointments'}
                     onPress={() => {
+                        router.push("broad/Appointment")
                         setShowDrawer(false)
                     }}
 
@@ -92,8 +101,8 @@ const UseDrawer = ({ active = "", setShowDrawer }) => {
                     label="Settings"
                     active={active === 'Settings'}
                     onPress={() => {
-                        setShowDrawer(false)
                         router.push("broad/Profile")
+                        setShowDrawer(false)
 
                     }}
                     icon={<Feather name="settings" size={20} color={active === 'Settings' ? "#0665CB" : "white"} />}

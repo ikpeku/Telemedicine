@@ -178,7 +178,7 @@ export default function Notification() {
         <SafeAreaView style={styles.container}>
             <Stack screenOptions={{ headerShown: false }} />
 
-            {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} active='Users' />}
+            {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} active='Doctors' />}
 
             <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Avatar
@@ -189,7 +189,7 @@ export default function Notification() {
             </View>
 
             <View style={{ width: "100%", flexDirection: "row" }}>
-                <DoctorCard title={"Users"} subTitle={"132"} rightIcon={<Users color="white" />} />
+                <DoctorCard title={"Doctors"} isDoctor={true} subTitle={"42"} rightIcon={<FontAwesome name="stethoscope" size={22} color={"white"} />} />
             </View>
 
             <View style={{ width: "100%" }}>

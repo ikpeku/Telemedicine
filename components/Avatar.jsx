@@ -5,7 +5,7 @@ import { Avatar, Text } from 'react-native-paper';
 const ProfileAvatar = ({ text, photoUrl, type = "Center" }) => (
     <View style={styles[`avatar${type}`]}>
 
-        <Avatar.Image size={type === "Center" ? 100 : 50} source={{ uri: photoUrl }} />
+        <Avatar.Image size={type === "Center" ? 70 : 50} source={{ uri: photoUrl }} />
         {text && <Text variant={type === "Center" ? 'bodySmall' : "headlineMedium"} style={{ paddingVertical: 10 }}>{text}</Text>}
     </View>
 );
