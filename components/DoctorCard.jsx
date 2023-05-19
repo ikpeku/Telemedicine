@@ -3,7 +3,7 @@ import React from 'react'
 import { Avatar, Card, Text } from 'react-native-paper';
 import { Button } from '../static';
 
-const DoctorCard = ({ title, rightIcon, subTitle, isDoctor = false }) => {
+const DoctorCard = ({ title, rightIcon, subTitle, isDoctor = false, onPress }) => {
     return (
         <Card style={styles.header}>
             <Card.Content >
@@ -14,7 +14,7 @@ const DoctorCard = ({ title, rightIcon, subTitle, isDoctor = false }) => {
                 <View style={styles.headerContainer}>
                     <Text variant='headlineMedium' style={[styles.title, { paddingVertical: 5, color: "white" }]}>{subTitle}</Text>
 
-                    {isDoctor && < TouchableOpacity onPress={() => { }}>
+                    {isDoctor && < TouchableOpacity onPress={onPress}>
                         <Text style={[styles.title,
                         { color: "#0665CB", backgroundColor: "white", borderRadius: 15, paddingVertical: 10, paddingHorizontal: 18 }]}>+ Invite Doctor</Text>
                     </TouchableOpacity>}

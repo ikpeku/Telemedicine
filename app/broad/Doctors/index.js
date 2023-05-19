@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Pressable,
 } from 'react-native';
-import { Card, Text as Text, Searchbar } from 'react-native-paper';
+import { Card, Text, Searchbar } from 'react-native-paper';
 import { AntDesign, FontAwesome5, MaterialCommunityIcons, Feather, FontAwesome } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -15,7 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Stack, useRouter } from 'expo-router';
 
-import { Avatar, DoctorCard, UseDrawer } from '../../../components';
+import { Avatar, DoctorCard, Modal, UseDrawer } from '../../../components';
 import { Appointment, Candle, Exit, Questionnaire, Users } from '../../../assets';
 
 
@@ -139,7 +139,7 @@ const Item = ({ item, index, router }) => {
             <Card.Content>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 5 }}>
                     <Text variant='titleMedium' style={[styles.title, { color: "#000" }]}>#{index + 1} - {item.name} </Text>
-                    < TouchableOpacity onPress={() => router.push("./Users/user")}>
+                    < TouchableOpacity onPress={() => router.push("./Doctors/doctor")}>
                         <Text style={[styles.title,
                         { color: "#0665CB", backgroundColor: "rgba(6, 101, 203, 0.08)", borderRadius: 8, paddingVertical: 10, paddingHorizontal: 18 }]}>View</Text>
                     </TouchableOpacity>
@@ -174,11 +174,24 @@ export default function Notification() {
     const [searchQuery, setSearchQuery] = useState('');
     const router = useRouter()
 
+
+    const [visible, setVisible] = useState(false);
+
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+
+
     return (
         <SafeAreaView style={styles.container}>
             <Stack screenOptions={{ headerShown: false }} />
 
             {showDrawer && <UseDrawer setShowDrawer={setShowDrawer} active='Doctors' />}
+
+            {/* modal  */}
+
+            <Modal visible={visible} hideModal={hideModal} />
+
+            {/* Modal handle end */}
 
             <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Avatar
@@ -189,12 +202,11 @@ export default function Notification() {
             </View>
 
             <View style={{ width: "100%", flexDirection: "row" }}>
-                <DoctorCard title={"Doctors"} isDoctor={true} subTitle={"42"} rightIcon={<FontAwesome name="stethoscope" size={22} color={"white"} />} />
+                <DoctorCard onPress={showModal} title={"Doctors"} isDoctor={true} subTitle={"42"} rightIcon={<FontAwesome name="stethoscope" size={22} color={"white"} />} />
             </View>
 
             <View style={{ width: "100%" }}>
-                {/* <DoctorCard title={"Questionnaires"} subTitle={"132"} rightIcon={<Questionnaire color="white" />} />
-                <DoctorCard title={"Appointments"} subTitle={"80"} rightIcon={<Appointment color="white" />} /> */}
+
 
                 <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro" }}>
                     <Searchbar
@@ -239,19 +251,11 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: '#fff',
-        // margin: 1,
         borderWidth: 0.4,
         borderColor: "rgba(0,0,0,0.1)",
-        // width: "100%"
-
-
     },
     title: {
         fontFamily: 'Avenir',
-        // fontWeight: 500,
-        // fontSize: 16,
-        // lineHeight: 22,
-        // color: "#000",
     },
 
 });
