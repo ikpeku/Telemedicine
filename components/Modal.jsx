@@ -5,7 +5,7 @@ import { Button, Input } from '../static';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'expo-router';
 
-const DoctorModal = ({ visible, hideModal }) => {
+const DoctorModal = ({ visible, hideModal, remove = false }) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter()
 
@@ -15,25 +15,54 @@ const DoctorModal = ({ visible, hideModal }) => {
         }
     });
 
+
     const onSubmit = async (data) => {
         if (loading) return
         setLoading(true)
-        try {
 
-            router.push({ pathname: "broad/Doctors/adminsuccess", params: { type: "invite" } })
-            hideModal()
-        } catch (error) {
-            Alert.alert("Error", error.message)
+        if (!remove) {
+            try {
 
-        } finally {
-            setLoading(false)
+                router.push({ pathname: "broad/Doctors/adminsuccess", params: { type: "invite" } })
+                hideModal()
+            } catch (error) {
+                Alert.alert("Error", error.message)
+
+            } finally {
+                setLoading(false)
+            }
         }
+
+
+        if (remove) {
+            try {
+
+                router.push({ pathname: "broad/Doctors/adminsuccess", params: { type: "remove" } })
+                hideModal()
+            } catch (error) {
+                Alert.alert("Error", error.message)
+
+            } finally {
+                setLoading(false)
+            }
+        }
+
+
+
+
+
     }
+
+
     return (
         <Portal>
             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.root}>
-                <Text variant='titleLarge'>Invite a new doctor</Text>
-                <View style={{ width: "100%" }}>
+                {!remove && <Text variant='titleLarge'>Invite a new doctor</Text>}
+                {remove && <Text variant='titleMedium' style={{ textAlign: "center" }}>You’re about to remove this doctor</Text>}
+
+                {remove && <Text variant='bodyMedium'>Do you want to continue?</Text>}
+
+                {!remove && <View style={{ width: "100%" }}>
 
                     <Input control={control} label="Doctor Email" placeholder="Enter doctors email address" name="Email" rules={{
                         required: "This field is required.", pattern: {
@@ -41,11 +70,11 @@ const DoctorModal = ({ visible, hideModal }) => {
                             message: 'Enter a valid e-mail address',
                         }
                     }} />
-                </View>
+                </View>}
 
                 <View style={styles.btn}>
                     <View style={{ flexGrow: 1, flex: 1 }}>
-                        {!loading && <Button title="Add" onPress={handleSubmit(onSubmit)} />}
+                        {!loading && <Button title={remove ? "Remove" : "Add"} onPress={handleSubmit(onSubmit)} />}
                         {loading && <Button title="loading" />}
                     </View>
                     <View style={{ flexGrow: 1, flex: 1 }}>

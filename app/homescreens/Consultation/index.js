@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, View, Keyboard, Image } from 'react-native'
 import { Text, Searchbar } from 'react-native-paper';
 import CardTag from '../../../components/CardTag';
 import { Ionicons } from '@expo/vector-icons';
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Doctors } from '../../../components/data';
 
@@ -30,7 +30,6 @@ export default function Consultation() {
     return (
         <SafeAreaView style={styles.root} >
 
-            <Stack.Screen options={{ headerShown: false }} />
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10 }}>
                 <Image source={require('../../../assets/logo.png')} style={{}} />
                 <View style={{ borderRadius: 8, borderWidth: 1, borderColor: "gainsboro", flex: 1 }}>
