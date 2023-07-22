@@ -57,9 +57,9 @@ export default function Consultation() {
                     title={item.Name}
                     subTitle={item.expert}
                     url={item.img}
-                    rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                    rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" style={{ opacity: 0.5 }} />}
                 />}
-                keyExtractor={item => item.id}
+                // keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ gap: 10 }}
             />

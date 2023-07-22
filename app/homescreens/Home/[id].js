@@ -49,26 +49,28 @@ const User = () => {
             <View style={{ padding: 10 }}>
 
 
-                <Text style={[styles.text, { fontWeight: "bold", marginVertical: 20 }]} variant='titleLarge'>About {currentUser[0]?.title.toLocaleLowerCase()}</Text>
+                <Text style={[styles.text, { fontWeight: "bold", marginVertical: 20 }]}
+                    variant='titleLarge'>{currentUser[0]?.detailTitle.toLocaleLowerCase()}</Text>
 
                 {currentUser[0]?.detail && <Text variant='bodyLarge'>{currentUser[0]?.detail}</Text>}
 
-                <Text style={[styles.text, { fontWeight: "bold", textAlign: "center", marginVertical: 20 }]} variant='titleLarge'>Treatment for anxiety in 3 easy steps</Text>
+                <Text style={[styles.text, { fontWeight: "bold", textAlign: "center", marginVertical: 20 }]}
+                    variant='titleLarge'>How it works!</Text>
 
                 <View style={{ gap: 20 }}>
                     <TreatmentCard
-                        title="Let us know how you’ve been feeling"
-                        text="We want to understand your experience so we can provide the best treatment."
+                        title="Complete a virtual consultation"
+                        text="You will answer a few questions to assess the right treatment plan for you and enable our medical providers to evaluate your symptoms and thought process"
                         source={require("../../../assets/homeDetail1.png")} />
 
                     <TreatmentCard
                         title="Wait for your result to be examined by our experienced doctors"
-                        text="We want to understand your experience so we can provide the best treatment."
+                        text="A member of our medical team will evaluate your response and approve a personalized treatment plan for you."
                         source={require("../../../assets/homeDetail2.png")} />
 
                     <TreatmentCard
                         title="Make payment and get your treatment and prescription"
-                        text="We want to understand your experience so we can provide the best treatment."
+                        text="We pick your medication at the pharmacy and deliver at your doorstep while our medical team follow up for ongoing care"
                         source={require("../../../assets/homeDetail3.png")} />
                 </View>
 

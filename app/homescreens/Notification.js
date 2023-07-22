@@ -9,6 +9,7 @@ import { Card, Text as Paper_Text } from 'react-native-paper';
 
 
 const DATA = [
+
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         date: new Date(),

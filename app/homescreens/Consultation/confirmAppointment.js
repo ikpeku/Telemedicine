@@ -32,7 +32,7 @@ export default function Page() {
                         <Text style={styles.text}>The appointment details has been sent to your email address</Text>
                     </View>
 
-                    <Button title="Processed to make payment" onPress={() => navigate.popToTop()} />
+                    <Button title="Done" onPress={() => navigate.popToTop()} />
                 </View>
 
             </View>

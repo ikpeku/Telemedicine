@@ -66,7 +66,7 @@ export default function Page() {
         }
 
         if (item && user === null) {
-            router.replace("onboarding3");
+            router.replace("/signup/login");
             return
         }
 

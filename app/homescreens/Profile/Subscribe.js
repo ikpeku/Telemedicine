@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet, View, } from 'react-native'
-import { Text, Checkbox } from 'react-native-paper';
+import { Pressable, ScrollView, StyleSheet, View, } from 'react-native'
+import { Text, Checkbox, Divider, Card } from 'react-native-paper';
 import { Octicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Button } from '../../../static';
@@ -26,51 +26,75 @@ const Subscribe = () => {
     }
 
     return (
-        <View style={styles.root}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.root}>
 
-            <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 5, paddingVertical: 30 }}>
-                <Text variant="titleLarge">Select your plan</Text>
-                <Text style={{ paddingVertical: 8 }} variant="titleLarge">
-                    {annual === "annual" ? "$160/y" : "$15/y"}
-                    <Text variant="titleSmall" style={{ color: "gainsboro" }} > (Billed {annual === "annual" ? "annual" : "monthly"})</Text>
-                </Text>
+                <View style={styles.boxContainer}>
+                    <Pressable onPress={() => setAnnual("monthly")} style={[styles.box, annual == "monthly" ? { backgroundColor: "#0665CB", borderColor: "#0665CB" } : { backgroundColor: "#F4F4F4", borderColor: "#F4F4F4" }]}>
+                        <Text variant="titleLarge" style={{ color: annual === "monthly" ? "#fff" : "#000" }}>Monthly</Text>
+                    </Pressable>
+
+
+                    <Pressable onPress={() => setAnnual("annual")} style={[styles.box, annual == "annual" ?
+                        { backgroundColor: "#0665CB", borderColor: "#0665CB" } : { backgroundColor: "#F4F4F4", borderColor: "#F4F4F4" }]}>
+                        <Text variant="titleLarge" style={{ color: annual !== "monthly" ? "#fff" : "#000" }} >Annual</Text>
+                    </Pressable>
+
+                </View>
+
+
+                <Card style={{ backgroundColor: "#fff", }}>
+                    <View style={{ alignItems: "center", padding: 20 }}>
+                        <Text variant="titleLarge" style={{ fontFamily: "Avenir" }}>Individual</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 24, fontFamily: "Avenir" }} variant="titleLarge">
+                            {annual === "annual" ? "$120" : "$10"}
+                            <Text style={{}} variant="titleLarge">
+                                {annual === "annual" ? "/y" : "/m"}
+                            </Text>
+                        </Text>
+                    </View>
+
+                    <Divider style={{}} />
+
+                    <View style={{ gap: 10, padding: 20 }}>
+                        <Render title="1 appointment everyday" />
+                        <Render title="Drug refill every week" />
+                        <Render title="Free delivery" />
+                    </View>
+
+                    <View style={{ width: "75%", alignSelf: "center", paddingVertical: 20 }}>
+                        <Button title="Subscribe" onPress={onSubsquire} />
+                    </View>
+
+                </Card>
+
+                <Card style={{ backgroundColor: "#fff", }}>
+                    <View style={{ alignItems: "center", padding: 20 }}>
+                        <Text variant="titleLarge" style={{ fontFamily: "Avenir" }}>Family</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 24, fontFamily: "Avenir" }} variant="titleLarge">
+                            {annual === "annual" ? "$180" : "$15"}
+                            <Text style={{}} variant="titleLarge">
+                                {annual === "annual" ? "/y" : "/m"}
+                            </Text>
+                        </Text>
+                    </View>
+
+                    <Divider style={{}} />
+
+                    <View style={{ gap: 10, padding: 20 }}>
+                        <Render title="Up to 3 appointments everyday " />
+                        <Render title="Drug refill every week" />
+                        <Render title="Free delivery" />
+                    </View>
+
+                    <View style={{ width: "75%", alignSelf: "center", paddingVertical: 20 }}>
+                        <Button title="Subscribe" onPress={onSubsquire} />
+                    </View>
+
+                </Card>
+
             </View>
-
-
-            <View style={{ flexDirection: "row", padding: 5, gap: 10 }}>
-                <Pressable onPress={() => setAnnual("monthly")} style={[styles.box, annual == "monthly" ? { borderColor: "#0665CB" } : {}]}>
-                    <Text variant="titleLarge">Monthly</Text>
-                    <Checkbox
-                        status={annual === "monthly" ? 'checked' : 'unchecked'}
-
-                    />
-                </Pressable>
-
-
-                <Pressable onPress={() => setAnnual("annual")} style={[styles.box, annual == "annual" ? { borderColor: "#0665CB" } : {}]}>
-                    <Text variant="titleLarge">Annual</Text>
-                    <Checkbox
-                        status={annual === "annual" ? 'checked' : 'unchecked'}
-
-                    />
-                </Pressable>
-
-            </View>
-
-
-            <Text style={{ marginVertical: 18 }} variant="titleLarge">What you get</Text>
-
-            <View style={{ gap: 10 }}>
-                <Render title="Up to 3 appointments everyday " />
-                <Render title="Drug refill every week" />
-                <Render title="Free delivery" />
-            </View>
-
-            <View style={{ marginTop: "auto", paddingBottom: 20 }}>
-                <Button title="Subscribe" onPress={onSubsquire} />
-            </View>
-
-        </View>
+        </ScrollView>
     )
 }
 
@@ -80,15 +104,23 @@ const styles = StyleSheet.create({
     root: {
         backgroundColor: "#fff",
         flex: 1,
-        paddingHorizontal: 10
+        padding: 20,
+        rowGap: 25
+    },
+    boxContainer: {
+        flexDirection: "row",
+        gap: 10,
+        paddingVertical: 7,
+        paddingHorizontal: 15,
+        backgroundColor: "#F4F4F4",
+        borderRadius: 5,
     },
     box: {
         borderWidth: 1,
         borderRadius: 8,
         flexGrow: 1,
-        flexDirection: "row",
-        justifyContent: "space-around",
         alignItems: "center",
-        paddingVertical: 18
+        paddingVertical: 12
     }
+
 })

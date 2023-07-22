@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import * as MailComposer from 'expo-mail-composer';
-import { FontAwesome5, Feather } from '@expo/vector-icons';
+import { FontAwesome5, Feather, MaterialIcons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
 
 const help = () => {
@@ -18,9 +18,16 @@ const help = () => {
 
     return (
         <View style={styles.container}>
-            <View style={{ paddingVertical: 20, paddingHorizontal: 10 }}>
+            {/* <View style={{ paddingVertical: 20, paddingHorizontal: 10 }}>
                 <Text style={styles.title} >Contact Us</Text>
-            </View>
+            </View> */}
+            <Pressable onPress={handleCall}>
+                <View style={styles.textContainer}>
+                    <MaterialIcons name="chat" size={24} color="#0665CB" />
+                    <Text>Live  chat</Text>
+                </View>
+            </Pressable>
+
             <Pressable onPress={handleMailto}>
                 <View style={styles.textContainer}>
                     <FontAwesome5 name="envelope" size={24} color="#0665CB" />
@@ -43,14 +50,10 @@ export default help
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        paddingVertical: 20
     },
-    title: {
-        fontFamily: 'Avenir',
-        fontWeight: 500,
-        fontSize: 24,
-        lineHeight: 33,
-    },
+
     textContainer: {
         flexDirection: "row",
         alignItems: "center",

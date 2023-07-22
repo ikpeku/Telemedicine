@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, View, Pressable } from 'react-native'
 import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link, useRouter } from "expo-router";
-import { Avatar, Switch } from 'react-native-paper';
+import { Avatar, Switch, Text } from 'react-native-paper';
 import Button from '../../../static/Button';
 import CardTag from '../../../components/CardTag';
 import { Auth } from 'aws-amplify';
@@ -43,7 +43,7 @@ const Profile = () => {
 
     const HandleSignout = async () => {
         await Auth.signOut()
-        router.replace("/onboarding3")
+        router.replace("/signup/login")
 
     }
 
@@ -56,26 +56,31 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
-            <CardTag
-                title={user?.attributes?.name}
-                subTitle={user?.attributes?.email}
+            {/* <CardTag
+                // title={user?.attributes?.name}
+                // subTitle={user?.attributes?.email}
                 url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
                 rightIcon={<Avatar.Image size={24} source={require('../../../assets/profileIcon.png')}
                     style={{ backgroundColor: "#fff" }} />}
+            /> */}
+            <View style={{ flexDirection: "row", alignItems: "center", padding: 15, gap: 10, paddingBottom: 30 }}>
+
+                <Avatar.Image size={40}
+                    source={{ uri: "https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960" }} />
+                <Text variant='titleMedium'>{user?.attributes?.name}</Text>
+                <Avatar.Image size={24} source={require('../../../assets/profileIcon.png')}
+                    style={{ backgroundColor: "#fff", marginLeft: "auto" }} />
+            </View>
+
+            {/* Account */}
+            <Item
+                title="Account"
+                leftIcon={<Feather name="user" size={20} color="#0665CB" />}
+                rightIcon={<Ionicons name="chevron-forward" size={20} color="#0665CB" />}
+                onPress={HandlePassword}
+                path={"homescreens/Profile/editprofile"}
+            // params={{ email: user?.attributes?.email }}
             />
-
-
-            <View style={{ padding: 10 }}>
-                <Link href={{ pathname: "homescreens/Profile/editprofile" }} asChild>
-                    <Button title="Edit Profile" type='textiary' />
-
-                </Link>
-            </View>
-
-
-            <View>
-                <Text style={[styles.cta, { paddingHorizontal: 10, paddingBottom: 30, marginTop: 20 }]}>Settings</Text>
-            </View>
 
 
             {/* Password */}
@@ -160,14 +165,14 @@ const styles = StyleSheet.create({
         lineHeight: 19,
         color: "rgba(0, 0, 0, 0.5)"
     },
-    cta: {
-        fontFamily: 'Avenir',
-        fontWeight: "500",
-        fontSize: 16,
-        lineHeight: 22,
+    // cta: {
+    //     fontFamily: 'Avenir',
+    //     fontWeight: "500",
+    //     fontSize: 16,
+    //     lineHeight: 22,
 
-        color: "#000"
-    },
+    //     color: "#000"
+    // },
     switchContainer: {
         flexDirection: "row",
         alignItems: "center",

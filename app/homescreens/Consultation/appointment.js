@@ -114,7 +114,7 @@ const Appointment = () => {
             <View>
                 <Card style={{ backgroundColor: "#fff" }} mode='contained' >
                     <Card.Content >
-                        <Text variant='titleLarge' style={styles.title} >Date Available</Text>
+                        <Text variant='titleLarge' style={styles.title} >Select Date</Text>
                         <View style={{}}>
                             <View style={{ flexDirection: "row", paddingVertical: 5, columnGap: 10, flexWrap: "wrap", rowGap: 11, marginTop: 10, }}>
                                 {
@@ -140,9 +140,9 @@ const Appointment = () => {
             <View>
                 <Card style={{ backgroundColor: "#fff" }} mode='contained' >
                     <Card.Content>
-                        <Text variant='titleLarge' style={styles.title} >Time Available</Text>
+                        <Text variant='titleLarge' style={styles.title} >Select time</Text>
                         <View>
-                            <View style={{ flexDirection: "row", paddingVertical: 5, columnGap: 10, flexWrap: "wrap", rowGap: 11, marginTop: 10, justifyContent: "center" }}>
+                            <View style={{ flexDirection: "row", paddingVertical: 5, columnGap: 10, flexWrap: "wrap", rowGap: 11, marginTop: 10, justifyContent: "flex-start" }}>
                                 {
                                     ["09:00 am", "10:00 am", "12:00 pm", "02:00 pm", "04:00 pm", "05:00 pm"].map((time, index) => (
 

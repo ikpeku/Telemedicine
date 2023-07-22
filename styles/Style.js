@@ -20,10 +20,10 @@ export const styles = StyleSheet.create({
         flex: 1
     },
     title: {
-        fontFamily: "Nunito",
+        fontFamily: "Avenir",
         color: "#0665CB",
         fontWeight: 500,
-        fontSize: 35,
+        fontSize: 24,
         lineHeight: 33,
         textAlign: "center",
         // marginBottom: 10,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     },
     text: {
         color: "#0665CB",
-        fontFamily: "Nunito",
+        fontFamily: "Avenir",
         textAlign: "center",
         fontWeight: 400,
         fontSize: 16,

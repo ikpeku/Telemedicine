@@ -11,7 +11,7 @@ const CardTag = ({ mode = "contained", rightIcon, title, subTitle, url, elevatio
                         source={{ uri: url }} />
 
                     <View>
-                        <Text variant='titleLarge' style={styles.title}>{title}</Text>
+                        <Text variant='titleMedium' style={styles.title}>{title}</Text>
                         <Text variant='bodyMedium' style={[styles.title, styles.subTitle]}>{subTitle}</Text>
                     </View>
 

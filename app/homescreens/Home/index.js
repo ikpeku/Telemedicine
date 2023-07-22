@@ -38,7 +38,7 @@ const Home = () => {
         </Card>
     );
 
-    const HeaderTitle = () => <Text variant='headlineSmall'  >What can we help you with today?</Text>
+    const HeaderTitle = () => <Text variant='headlineSmall'  >What we treat</Text>
 
     return (
 

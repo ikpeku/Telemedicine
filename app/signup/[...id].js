@@ -68,98 +68,108 @@ export default function Sign() {
 
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 30 }}>
-                <Stack.Screen
-                    options={{
-                        title: pathname === "/signup/login" ? "Welcome back" : "Set up your profile",
-                        headerTintColor: "#0665CB", headerLargeTitleStyle: styles.title,
-                        headerTitleStyle: styles.title, headerBackVisible: false,
-                        headerShadowVisible: false
-                    }} />
+        <View style={{ flex: 1 }}>
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  >
+                    <Stack.Screen
+                        options={{
+                            title: pathname === "/signup/login" ? "Welcome back" : "Set up your profile",
+                            headerTintColor: "#0665CB", headerLargeTitleStyle: styles.title,
+                            headerTitleStyle: styles.title, headerBackVisible: false,
+                            headerShadowVisible: false
+                        }} />
 
 
-                <View style={{ marginTop: 10 }}>
+                    <View style={{ marginTop: 10 }}>
 
-                    {pathname === "/signup/register" &&
-                        <Input control={control} label="Full Name" placeholder="Enter Full Name" name="Full_Name" rules={{ required: "This field is required" }} />
-                    }
-
-
-
-                    <Input control={control} label="Email Address" placeholder="Enter Email" name="Email_Address" rules={{
-                        required: "This field is required.", pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: 'Enter a valid e-mail address',
+                        {pathname === "/signup/register" &&
+                            <>
+                                <Text style={styles.label}>Full Name </Text>
+                                <Input control={control} placeholder="Enter Full Name" name="Full_Name" rules={{ required: "This field is required" }} />
+                            </>
                         }
-                    }} />
-
-                    {pathname === "/signup/register" &&
-                        <Input control={control} label="Phone Number" placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "This field is required" }} />
-                    }
-
-                    <Input control={control} label="Password" placeholder="Enter Password" name="Password"
-                        rules={{ required: "This field is required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true}
-                    />
-                    <Text style={[styles.cta, { textAlign: "left", color: "#0665CB" }]} onPress={() => router.push({ pathname: "/signup/forgotPassword", params: { email } })} >Forget Password</Text>
-
-                </View>
 
 
-                {/*  Sinup btn*/}
-                <View style={{ width: "80%", alignSelf: "center", marginVertical: 30 }}>
-                    <Button onPress={handleSubmit(onFormSubmit)} title={pathname === "/signup/login" ? "Log In" : "Sign up"} />
-                </View>
+                        <Text style={styles.label}>Email Address</Text>
+                        <Input control={control} placeholder="Enter Email" name="Email_Address" rules={{
+                            required: "This field is required.", pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                message: 'Enter a valid e-mail address',
+                            }
+                        }} />
+
+                        {pathname === "/signup/register" &&
+                            <>
+                                <Text style={styles.label}>Phone Number</Text>
+                                <Input control={control} placeholder="Enter Mobile Number" name="Phone_Number" rules={{ required: "This field is required" }} />
+                            </>
+                        }
+
+                        <Text style={styles.label}>Password</Text>
+                        <Input control={control} placeholder="Enter Password" name="Password"
+                            rules={{ required: "This field is required", minLength: { value: 7, message: "password should be atleast 7 characters." } }} passord={true}
+                        />
+                        <Text style={[styles.cta, { textAlign: "left", color: "#0665CB" }]} onPress={() => router.push({ pathname: "/signup/forgotPassword", params: { email } })} >Forget Password</Text>
+
+                    </View>
+
+
+                    {/*  Sinup btn*/}
+                    <View style={{ width: "80%", alignSelf: "center", marginVertical: 30 }}>
+                        <Button onPress={handleSubmit(onFormSubmit)} title={pathname === "/signup/login" ? "Log In" : "Sign up"} />
+                    </View>
 
 
 
 
-                <View style={styles.ctaContainer}>
-                    <Text style={styles.cta}>Already have an account</Text>
-                    <Link href={pathname === "/signup/login" ? "/signup/register" : "/signup/login"}>
-                        <Text style={styles.ctaBtn}>{pathname === "/signup/login" ? "Sign Up" : "Sign In"}</Text>
-                    </Link>
-                </View>
+                    <View style={styles.ctaContainer}>
+                        <Text style={styles.cta}>Don’t have an account</Text>
+                        <Link href={pathname === "/signup/login" ? "/signup/register" : "/signup/login"}>
+                            <Text style={styles.ctaBtn}>{pathname === "/signup/login" ? "Sign Up" : "Sign In"}</Text>
+                        </Link>
+                    </View>
 
-                <View style={styles.ctaContainer}>
+                    {/* <View style={styles.ctaContainer}>
                     <Link href={pathname !== "/signup/login" ? "/doctor" : "/doctor"}>
                         <Text style={styles.ctaBtn}>{pathname !== "/signup/login" ? "Sign Up" : "Sign In"}</Text>
                     </Link>
                     <Text style={styles.cta}> as Doctor</Text>
-                </View>
-                {/*DOctor */}
-                <View style={styles.ctaContainer}>
+                </View> */}
+                    {/*DOctor */}
+                    {/* <View style={styles.ctaContainer}>
                     <Text style={styles.cta}>Admin</Text>
                     <Link href={pathname !== "/signup/login" ? "/broad" : "/broad"}>
                         <Text style={styles.ctaBtn}>{pathname !== "/signup/login" ? "Sign Up" : "Sign In"}</Text>
                     </Link>
-                </View>
+                </View> */}
 
 
-                <View style={styles.lineContainer}>
-                    <View style={styles.line} />
-                    <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>or</Text>
-                    <View style={styles.line} />
-                </View>
+                    <View style={styles.lineContainer}>
+                        <View style={styles.line} />
+                        <Text style={{ color: "rgba(0, 0, 0, 0.5)" }}>or</Text>
+                        <View style={styles.line} />
+                    </View>
 
-                {/* Google btn */}
-                <Button
-                    title={pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}
-                    icon={<Image source={require('../../assets/google.png')} style={{ width: 18, height: 18 }} />}
-                    type="secondary"
-                    onPress={signin}
-                />
+                    {/* Google btn */}
+                    <Button
+                        title={pathname === "/signup/login" ? "Log In with Google" : "Sign up with Google"}
+                        icon={<Image source={require('../../assets/google.png')} style={{ width: 18, height: 18 }} />}
+                        type="secondary"
+                        onPress={signin}
+                    />
 
 
 
-                {/* </Pressable> */}
+                    {/* </Pressable> */}
+                </KeyboardAvoidingView>
             </ScrollView>
             {loading && (
                 <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", ...StyleSheet.absoluteFill, backgroundColor: "transparent" }]}>
                     <ActivityIndicator animating={true} size={"large"} color={MD2Colors.greenA700} />
                 </View>
             )}
-        </KeyboardAvoidingView>
+
+        </View>
 
     )
 
@@ -233,9 +243,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         gap: 10,
-        marginVertical: 40
+        // marginVertical: 40
+        paddingVertical: 15
 
     },
+    label: {
+        fontWeight: "bold"
+    }
 
 
 

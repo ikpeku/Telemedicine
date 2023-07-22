@@ -20,7 +20,7 @@ export default function Layout() {
         <Tabs.Screen name="Consultation" options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="plus-outline" size={25} color={color} /> }} />
         <Tabs.Screen name="Notification" options={{
             headerShown: true,
-            title: "Notifications",
+            title: "Orders",
             headerTintColor: "#0665CB",
             headerTitleAlign: "center",
             headerTitleStyle: {
