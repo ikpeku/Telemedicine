@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Pressable } from 'react-native'
 import { Feather, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link, useRouter } from "expo-router";
@@ -8,11 +8,12 @@ import CardTag from '../../../components/CardTag';
 import { Auth } from 'aws-amplify';
 import { userProvider } from '../../../Context/UserProvider';
 import { Exit } from '../../../assets';
-
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 
 const Profile = () => {
     const { user } = useContext(userProvider)
+    const [loading, setLoadig] = useState(false)
 
     const router = useRouter()
 
@@ -42,9 +43,11 @@ const Profile = () => {
 
 
     const HandleSignout = async () => {
-        await Auth.signOut()
-        router.replace("/signup/login")
+        if (loading) return
+        setLoadig(true)
 
+        await Auth.signOut()
+        setLoadig(false)
     }
 
     // console.log(user?.attributes?.email)
@@ -53,16 +56,16 @@ const Profile = () => {
         await Auth.forgotPassword(user?.attributes?.email)
     }
 
+    useEffect(() => {
+        if (!user) {
+            router.replace("/signup/login")
+        }
+    }, [user])
+
 
     return (
         <View style={styles.container}>
-            {/* <CardTag
-                // title={user?.attributes?.name}
-                // subTitle={user?.attributes?.email}
-                url="https://imageio.forbes.com/specials-images/imageserve/609946db7c398a0de6c94893/Mid-Adult-Female-Entrepreneur-With-Arms-Crossed-/960x0.jpg?format=jpg&width=960"
-                rightIcon={<Avatar.Image size={24} source={require('../../../assets/profileIcon.png')}
-                    style={{ backgroundColor: "#fff" }} />}
-            /> */}
+
             <View style={{ flexDirection: "row", alignItems: "center", padding: 15, gap: 10, paddingBottom: 30 }}>
 
                 <Avatar.Image size={40}
@@ -121,14 +124,20 @@ const Profile = () => {
 
 
             {/* Exit */}
-            <View style={[{ marginTop: "auto" }]}>
+            <Pressable onPress={() => HandleSignout()} style={[{ marginTop: "auto" }]}>
                 <Item
                     title="Sign out"
                     leftIcon={<Exit color="#EA4335" />}
                     signout={true}
-                    onPress={HandleSignout}
+                    onPress={() => HandleSignout()}
                 />
-            </View>
+            </Pressable>
+
+            {loading && (
+                <View style={[{ flex: 1, alignItems: "center", justifyContent: "center", ...StyleSheet.absoluteFill, backgroundColor: "transparent" }]}>
+                    <ActivityIndicator animating={true} size={"large"} color={MD2Colors.greenA700} />
+                </View>
+            )}
 
         </View>
     )
